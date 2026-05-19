@@ -1,0 +1,49 @@
+# Credenciales y variables de entorno
+.env
+*.env
+.env.*
+!.env.example
+
+# Checkpoints de Spark
+checkpoint/
+*.checkpoint
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# Datos temporales
+*.tmp
+*.bak

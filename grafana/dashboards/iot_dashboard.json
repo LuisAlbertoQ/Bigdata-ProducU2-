@@ -1,0 +1,155 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "celsius"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, estacion, avg_temperatura FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Temperatura en Tiempo Real",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, estacion, avg_humedad FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Humedad en Tiempo Real",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "yellow", "value": 50 },
+              { "color": "orange", "value": 100 },
+              { "color": "red", "value": 150 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, estacion, avg_iaq FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Indice de Calidad del Aire (IAQ)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "hPa"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, estacion, avg_presion FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Presion Atmosferica",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 16 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, sum(evento_count) as total FROM air_quality_metrics GROUP BY window_end ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Throughput (eventos/ventana)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "ms"
+        }
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 16 },
+      "targets": [
+        {
+          "rawSql": "SELECT window_end, avg(latencia_ms) as avg_latency FROM air_quality_metrics GROUP BY window_end ORDER BY window_end DESC LIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Latencia Promedio del Pipeline",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 16 },
+      "targets": [
+        {
+          "rawSql": "SELECT estacion, count(*) as total_ventanas FROM air_quality_metrics GROUP BY estacion",
+          "refId": "A"
+        }
+      ],
+      "title": "Eventos por Estacion",
+      "type": "piechart"
+    }
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["iot", "air-quality", "kappa"],
+  "templating": { "list": [] },
+  "time": { "from": "now-15m", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "IoT Air Quality - Kappa Pipeline",
+  "uid": "iot-kappa-001",
+  "version": 1
+}
