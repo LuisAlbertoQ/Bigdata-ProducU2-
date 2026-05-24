@@ -19,8 +19,9 @@
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, estacion, avg_temperatura FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, avg_temperatura AS value, estacion AS metric FROM air_quality_metrics ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Temperatura en Tiempo Real",
@@ -38,8 +39,9 @@
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, estacion, avg_humedad FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, avg_humedad AS value, estacion AS metric FROM air_quality_metrics ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Humedad en Tiempo Real",
@@ -63,8 +65,9 @@
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, estacion, avg_iaq FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, avg_iaq AS value, estacion AS metric FROM air_quality_metrics ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Indice de Calidad del Aire (IAQ)",
@@ -81,8 +84,9 @@
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, estacion, avg_presion FROM air_quality_metrics ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, avg_presion AS value, estacion AS metric FROM air_quality_metrics ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Presion Atmosferica",
@@ -99,8 +103,9 @@
       "gridPos": { "h": 8, "w": 8, "x": 0, "y": 16 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, sum(evento_count) as total FROM air_quality_metrics GROUP BY window_end ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, sum(evento_count) AS value FROM air_quality_metrics GROUP BY window_end ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Throughput (eventos/ventana)",
@@ -117,8 +122,9 @@
       "gridPos": { "h": 8, "w": 8, "x": 8, "y": 16 },
       "targets": [
         {
-          "rawSql": "SELECT window_end, avg(latencia_ms) as avg_latency FROM air_quality_metrics GROUP BY window_end ORDER BY window_end DESC LIMIT 100",
-          "refId": "A"
+          "rawSql": "SELECT window_end AS time, avg(latencia_ms) AS value FROM air_quality_metrics GROUP BY window_end ORDER BY window_end ASC LIMIT 500",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Latencia Promedio del Pipeline",
@@ -134,8 +140,9 @@
       "gridPos": { "h": 8, "w": 8, "x": 16, "y": 16 },
       "targets": [
         {
-          "rawSql": "SELECT estacion, count(*) as total_ventanas FROM air_quality_metrics GROUP BY estacion",
-          "refId": "A"
+          "rawSql": "SELECT estacion AS metric, count(*) AS value FROM air_quality_metrics GROUP BY estacion",
+          "refId": "A",
+          "format": "table"
         }
       ],
       "title": "Eventos por Estacion",

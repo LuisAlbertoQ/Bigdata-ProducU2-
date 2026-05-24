@@ -17,7 +17,7 @@ Este proyecto procesa datos ambientales (temperatura, humedad, presion, calidad 
         ↓
  [Apache Kafka]   →  topico: iot.air_quality.streaming
         ↓
-[Spark Streaming] →  ventanas (1min), watermark (2min), agregaciones
+ [Spark Streaming] →  ventanas (1min), watermark (30s), agregaciones
         ↓ (foreachBatch)
  [TimescaleDB]    →  sink de series de tiempo
         ↓
@@ -96,6 +96,7 @@ Edita `.env` con tus credenciales:
 ```
 SUPABASE_URL=https://tu-proyecto.supabase.co
 SUPABASE_KEY=eyJ...   # Clave anon (no sb_publishable)
+PRODUCER_INTERVAL=10   # Segundos entre cada envio de datos
 ```
 
 **Importante:** La clave debe ser la `anon public` (formato JWT `eyJ...`), **no** la `sb_publishable`. Se obtiene en Supabase → Settings → API.
@@ -104,6 +105,12 @@ SUPABASE_KEY=eyJ...   # Clave anon (no sb_publishable)
 
 ```bash
 docker-compose up -d --build
+```
+
+**Importante:** Usa `--build` en el primer arranque o después de modificar el `producer.py` para reconstruir la imagen. Si solo reinicias, usa:
+
+```bash
+docker-compose restart producer
 ```
 
 Esto levanta 6 contenedores:
@@ -163,7 +170,7 @@ Cada notebook se ejecuta celda por celda (Shift+Enter). El notebook 03 inicia qu
 |---|---|---|
 | Trigger | `processingTime = 10 seconds` | Micro-batch razonable para IoT |
 | Ventana | `1 minute`, slide `30 seconds` | Agregaciones con solapamiento |
-| Watermark | `2 minutes` | Tolera desconexiones IoT reales |
+| Watermark | `30 seconds` | Tolera pequenos retrasos de red |
 | Output mode | `update` | Resultados inmediatos sin esperar cierre de ventana |
 | Checkpoint | `/home/jovyan/checkpoint/iot` | Persistente entre reinicios |
 
@@ -202,6 +209,14 @@ docker-compose down
 rm -rf checkpoint/*
 docker-compose up -d
 ```
+
+### Latencia negativa en Grafana
+Valores de ~ -900ms son normales. Se debe a diferencias de reloj entre contenedores Docker. No afecta el funcionamiento del pipeline.
+
+### Dashboard no muestra datos
+1. Verifica que el notebook 03 este ejecutandose con la celda 7 activa.
+2. Configura el auto-refresh del dashboard en 10s (icono del reloj arriba a la derecha).
+3. Si al importar el JSON aparece "Datasource not found", selecciona manualmente la conexion PostgreSQL en cada panel.
 
 ## Autores
 

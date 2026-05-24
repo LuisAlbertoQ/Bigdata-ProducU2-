@@ -81,12 +81,14 @@ services:
   producer:
     build: ./producer
     container_name: producer
+    restart: unless-stopped
     depends_on:
       - kafka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_KEY=${SUPABASE_KEY}
+      - PRODUCER_INTERVAL=${PRODUCER_INTERVAL:-10}
     networks:
       - iot-network
 

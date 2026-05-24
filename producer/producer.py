@@ -135,7 +135,7 @@ def main():
 
             producer.flush()
             logger.info(f"Batch enviado. {len(ESTACIONES)} eventos publicados.")
-            time.sleep(1)
+            time.sleep(int(os.getenv("PRODUCER_INTERVAL", "10")))
 
         except KeyboardInterrupt:
             logger.info("Producer detenido.")
