@@ -38,9 +38,20 @@ use_mock_data = False
 
 if SUPABASE_KEY:
     try:
-        from supabase import create_client
-        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-        logger.info("Conexion a Supabase establecida")
+        import httpx
+        supabase = httpx.Client(
+            base_url=SUPABASE_URL,
+            headers={
+                "apikey": SUPABASE_KEY,
+                "Authorization": f"Bearer {SUPABASE_KEY}"
+            }
+        )
+        resp = supabase.get("/rest/v1/grupo1_air_quality", params={"select": "id", "limit": 1})
+        if resp.status_code == 200:
+            logger.info("Conexion a Supabase establecida")
+        else:
+            logger.warning(f"Supabase respondio {resp.status_code}. Usando datos mock.")
+            use_mock_data = True
     except Exception as e:
         logger.warning(f"Supabase no disponible ({e}). Usando datos mock.")
         use_mock_data = True
@@ -63,9 +74,12 @@ def fetch_real_data():
     if use_mock_data or supabase is None:
         return MOCK_BASE.copy()
     try:
-        response = supabase.table("grupo1_air_quality").select("*").order("created_at", desc=True).limit(1).execute()
-        if response.data:
-            return response.data[0]
+        resp = supabase.get(
+            "/rest/v1/grupo1_air_quality",
+            params={"select": "*", "order": "created_at.desc", "limit": 1}
+        )
+        if resp.status_code == 200 and resp.json():
+            return resp.json()[0]
     except Exception as e:
         logger.error(f"Error fetching Supabase: {e}")
     return MOCK_BASE.copy()
