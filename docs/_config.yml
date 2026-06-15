@@ -1,0 +1,6 @@
+title: "IoT Environmental Monitoring Pipeline"
+description: "Real-time IoT monitoring with Kappa Architecture (Kafka → Spark Streaming → TimescaleDB → Grafana)"
+theme: jekyll-theme-cayman
+show_downloads: true
+github:
+  repository_url: https://github.com/LuisAlbertoQ/Bigdata-ProducU2-.git
