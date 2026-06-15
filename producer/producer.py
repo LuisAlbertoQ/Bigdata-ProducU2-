@@ -12,7 +12,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-SUPABASE_URL = os.getenv("SUPABASE_URL", "https://mangrxgusewzgtewoayx.supabase.co")
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://ffwjdoguzaqpafuwaeam.supabase.co")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 KAFKA_BROKER = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:29092")
 TOPIC = "iot.air_quality.streaming"

@@ -1,0 +1,2 @@
+modelo,rmse,mae,mape
+XGBoost,0.317,0.2511,2.07
