@@ -1,7 +1,7 @@
 site_name: Pipeline IoT BigData
 site_description: "Pipeline E2E: IoT → Kafka → Spark Streaming → TimescaleDB → ML → Grafana"
 site_author: "Big Data - Unidad 2"
-copyright: 2026
+copyright: "2026 - Big Data U2"
 
 repo_url: https://github.com/LuisAlbertoQ/Bigdata-ProducU2-
 repo_name: LuisAlbertoQ/Bigdata-ProducU2-
