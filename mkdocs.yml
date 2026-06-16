@@ -11,14 +11,14 @@ theme:
   language: es
   palette:
     - scheme: default
-      primary: teal
-      accent: orange
+      primary: blue-grey
+      accent: amber
       toggle:
         icon: material/weather-night
         name: Modo oscuro
     - scheme: slate
-      primary: teal
-      accent: orange
+      primary: blue-grey
+      accent: amber
       toggle:
         icon: material/weather-sunny
         name: Modo claro
