@@ -47,3 +47,13 @@ logs/
 # Datos temporales
 *.tmp
 *.bak
+
+# MkDocs build artifacts
+site/
+.mkdocs/
+
+# Notebooks exportados (se regeneran en CI)
+docs/*.md
+!docs/index.md
+!docs/arquitectura.md
+!docs/grafana_dashboard.md

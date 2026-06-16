@@ -1,0 +1,70 @@
+site_name: Pipeline IoT BigData
+site_description: "Pipeline E2E: IoT → Kafka → Spark Streaming → TimescaleDB → ML → Grafana"
+site_author: "Big Data - Unidad 2"
+copyright: 2026
+
+repo_url: https://github.com/LuisAlbertoQ/Bigdata-ProducU2-
+repo_name: LuisAlbertoQ/Bigdata-ProducU2-
+
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: teal
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: Modo oscuro
+    - scheme: slate
+      primary: teal
+      accent: orange
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tabs
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+
+nav:
+  - Inicio: index.md
+  - Arquitectura: arquitectura.md
+  - Dashboard Grafana: grafana_dashboard.md
+  - Datos:
+    - Exploración Supabase: 01_exploracion_supabase.md
+    - Verificación Kafka: 02_verificacion_kafka.md
+    - Pipeline Streaming: 03_streaming_pipeline.md
+  - Machine Learning:
+    - Prophet: 04_modelo_prophet.md
+    - ARIMA: 05_modelo_arima.md
+    - XGBoost: 06_modelo_xgboost.md
+    - LSTM: 07_modelo_lstm.md
+    - Comparación: 08_comparacion_modelos.md
