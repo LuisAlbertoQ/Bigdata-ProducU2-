@@ -16,7 +16,7 @@
         <link rel="prev" href="../03_streaming_pipeline/">
       
       
-        <link rel="next" href="../05_modelo_arima/">
+        <link rel="next" href="../05_modelo_mlp/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Prophet - Pipeline IoT BigData</title>
+        <title>Random Forest - Pipeline IoT BigData</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#04-prediccion-con-prophet" class="md-skip">
+        <a href="#04-prediccion-con-random-forest" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Prophet
+              Random Forest
             
           </span>
         </div>
@@ -669,7 +669,7 @@
   <span class="md-ellipsis">
     
   
-    Prophet
+    Random Forest
   
 
     
@@ -687,7 +687,7 @@
   <span class="md-ellipsis">
     
   
-    Prophet
+    Random Forest
   
 
     
@@ -735,10 +735,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-preparacion-de-datos" class="md-nav__link">
+  <a href="#3-feature-engineering" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Preparacion de datos
+        3. Feature Engineering
       
     </span>
   </a>
@@ -746,10 +746,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-entrenamiento-de-prophet" class="md-nav__link">
+  <a href="#4-traintest-split" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Entrenamiento de Prophet
+        4. Train/Test Split
       
     </span>
   </a>
@@ -757,10 +757,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-prediccion" class="md-nav__link">
+  <a href="#5-entrenamiento-random-forest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Prediccion
+        5. Entrenamiento Random Forest
       
     </span>
   </a>
@@ -768,10 +768,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-evaluacion" class="md-nav__link">
+  <a href="#6-prediccion-y-evaluacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Evaluacion
+        6. Prediccion y Evaluacion
       
     </span>
   </a>
@@ -779,10 +779,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-grafico" class="md-nav__link">
+  <a href="#7-baseline-comparativo-lag-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Grafico
+        7. Baseline comparativo (lag-1)
       
     </span>
   </a>
@@ -790,10 +790,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-guardar-metricas" class="md-nav__link">
+  <a href="#8-importancia-de-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Guardar metricas
+        8. Importancia de Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-grafico-prediccion-vs-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Grafico prediccion vs real
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-guardar-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Guardar metricas
       
     </span>
   </a>
@@ -816,14 +838,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_modelo_arima/" class="md-nav__link">
+      <a href="../05_modelo_mlp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ARIMA
+    MLP
   
 
     
@@ -977,10 +999,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-preparacion-de-datos" class="md-nav__link">
+  <a href="#3-feature-engineering" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Preparacion de datos
+        3. Feature Engineering
       
     </span>
   </a>
@@ -988,10 +1010,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-entrenamiento-de-prophet" class="md-nav__link">
+  <a href="#4-traintest-split" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Entrenamiento de Prophet
+        4. Train/Test Split
       
     </span>
   </a>
@@ -999,10 +1021,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-prediccion" class="md-nav__link">
+  <a href="#5-entrenamiento-random-forest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Prediccion
+        5. Entrenamiento Random Forest
       
     </span>
   </a>
@@ -1010,10 +1032,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-evaluacion" class="md-nav__link">
+  <a href="#6-prediccion-y-evaluacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Evaluacion
+        6. Prediccion y Evaluacion
       
     </span>
   </a>
@@ -1021,10 +1043,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-grafico" class="md-nav__link">
+  <a href="#7-baseline-comparativo-lag-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Grafico
+        7. Baseline comparativo (lag-1)
       
     </span>
   </a>
@@ -1032,10 +1054,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-guardar-metricas" class="md-nav__link">
+  <a href="#8-importancia-de-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Guardar metricas
+        8. Importancia de Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-grafico-prediccion-vs-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Grafico prediccion vs real
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-guardar-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Guardar metricas
       
     </span>
   </a>
@@ -1062,19 +1106,20 @@
   
 
 
-<h1 id="04-prediccion-con-prophet">04 - Prediccion con Prophet<a class="headerlink" href="#04-prediccion-con-prophet" title="Permanent link">&para;</a></h1>
-<p>Modelo Prophet para prediccion de temperatura de ESP32_01.</p>
+<h1 id="04-prediccion-con-random-forest">04 - Prediccion con Random Forest<a class="headerlink" href="#04-prediccion-con-random-forest" title="Permanent link">&para;</a></h1>
+<p>Random Forest con features temporales para prediccion de temperatura.</p>
 <h2 id="1-instalacion-de-dependencias">1. Instalacion de dependencias<a class="headerlink" href="#1-instalacion-de-dependencias" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="err">!</span><span class="p">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">}</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">prophet</span> <span class="n">pandas</span> <span class="n">matplotlib</span> <span class="n">seaborn</span> <span class="n">psycopg2</span><span class="o">-</span><span class="n">binary</span> <span class="n">sqlalchemy</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
+<span class="err">!</span><span class="p">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">}</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">pandas</span> <span class="n">matplotlib</span> <span class="n">psycopg2</span><span class="o">-</span><span class="n">binary</span> <span class="n">sqlalchemy</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
 </code></pre></div>
 <h2 id="2-carga-de-datos-desde-timescaledb">2. Carga de datos desde TimescaleDB<a class="headerlink" href="#2-carga-de-datos-desde-timescaledb" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">prophet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Prophet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
 
 <span class="n">load_dotenv</span><span class="p">(</span><span class="s1">&#39;/home/jovyan/.env&#39;</span><span class="p">)</span>
@@ -1083,82 +1128,90 @@
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM air_quality_metrics WHERE estacion = &#39;ESP32_01&#39; AND avg_temperatura &lt; 20 ORDER BY window_start&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros cargados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_presion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Importing plotly failed. Interactive plots will not work.
+<div class="highlight"><pre><span></span><code>Registros cargados: 1042
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros cargados: 1022
+<div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq  avg_presion
+0 2026-05-26 14:17:30            11.59        51.48    34.41       649.91
+1 2026-05-26 14:18:00            11.59        51.48    31.91       649.23
+2 2026-05-26 14:18:00            11.59        51.48    32.66       649.82
+3 2026-05-26 14:18:30            11.59        51.48    29.41       648.56
+4 2026-05-26 14:18:30            11.59        51.48    32.08       649.79
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq
-0 2026-05-26 14:17:30            11.59        51.48    34.41
-1 2026-05-26 14:18:00            11.59        51.48    32.66
-2 2026-05-26 14:18:00            11.59        51.48    31.91
-3 2026-05-26 14:18:30            11.59        51.48    32.08
-4 2026-05-26 14:18:30            11.59        51.48    29.41
-</code></pre></div>
-<h2 id="3-preparacion-de-datos">3. Preparacion de datos<a class="headerlink" href="#3-preparacion-de-datos" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">df_prophet</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<h2 id="3-feature-engineering">3. Feature Engineering<a class="headerlink" href="#3-feature-engineering" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">df_rf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="c1"># Agregar a ventanas de 5 minutos</span>
-<span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">])</span>
-<span class="n">df_prophet</span> <span class="o">=</span> <span class="n">df_prophet</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;window_start&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5T&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">df_prophet</span> <span class="o">=</span> <span class="n">df_prophet</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros tras agregacion 5min: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_prophet</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">])</span>
-<span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_prophet</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">])</span>
+<span class="n">df_rf</span> <span class="o">=</span> <span class="n">df_rf</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;window_start&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5T&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_rf</span> <span class="o">=</span> <span class="n">df_rf</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros tras agregacion 5min: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_rf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;window_start&#39;</span><span class="p">])</span>
 
-<span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_prophet</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
-<span class="n">train</span> <span class="o">=</span> <span class="n">df_prophet</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">split</span><span class="p">]</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">df_prophet</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;minute&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">minute</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rango test: </span><span class="si">{</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="n">df_rf</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;temp_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_rf</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;hum_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_humedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_rf</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;iaq_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_iaq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_rf</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;pres_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_presion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_rf</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;eco2_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_eco2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;temp_rolling_3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;temp_rolling_5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_rf</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">,</span> <span class="s1">&#39;dayofweek&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;temp_lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_lag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_lag_3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hum_lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;hum_lag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;hum_lag_3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;iaq_lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;iaq_lag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;iaq_lag_3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;pres_lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;pres_lag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;pres_lag_3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;eco2_lag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;eco2_lag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;eco2_lag_3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;temp_rolling_3&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_rolling_5&#39;</span><span class="p">]</span>
+
+<span class="n">df_rf</span> <span class="o">=</span> <span class="n">df_rf</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros con features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_rf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 61
-Train: 48 registros
-Test: 13 registros
-Rango test: 2026-06-15 16:25:00 a 2026-06-15 18:35:00
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
+Registros con features: 62
+Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_1&#39;, &#39;temp_lag_2&#39;, &#39;temp_lag_3&#39;, &#39;hum_lag_1&#39;, &#39;hum_lag_2&#39;, &#39;hum_lag_3&#39;, &#39;iaq_lag_1&#39;, &#39;iaq_lag_2&#39;, &#39;iaq_lag_3&#39;, &#39;pres_lag_1&#39;, &#39;pres_lag_2&#39;, &#39;pres_lag_3&#39;, &#39;eco2_lag_1&#39;, &#39;eco2_lag_2&#39;, &#39;eco2_lag_3&#39;, &#39;temp_rolling_3&#39;, &#39;temp_rolling_5&#39;]
 </code></pre></div>
-<h2 id="4-entrenamiento-de-prophet">4. Entrenamiento de Prophet<a class="headerlink" href="#4-entrenamiento-de-prophet" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span>
-    <span class="n">daily_seasonality</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">weekly_seasonality</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">changepoint_prior_scale</span><span class="o">=</span><span class="mf">0.05</span>
+<h2 id="4-traintest-split">4. Train/Test Split<a class="headerlink" href="#4-traintest-split" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_rf</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">df_rf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">split</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">df_rf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>X_train: (49, 20), X_test: (13, 20)
+</code></pre></div>
+<h2 id="5-entrenamiento-random-forest">5. Entrenamiento Random Forest<a class="headerlink" href="#5-entrenamiento-random-forest" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
 <span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Modelo Prophet entrenado correctamente&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entrenamiento completado&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>03:02:46 - cmdstanpy - INFO - Chain [1] start processing
-03:02:46 - cmdstanpy - INFO - Chain [1] done processing
+<div class="highlight"><pre><span></span><code>Entrenamiento completado
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Modelo Prophet entrenado correctamente
-</code></pre></div>
-<h2 id="5-prediccion">5. Prediccion<a class="headerlink" href="#5-prediccion" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">future</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;5T&#39;</span><span class="p">)</span>
-<span class="n">forecast</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediccion completada&quot;</span><span class="p">)</span>
-<span class="n">forecast</span><span class="p">[[</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;yhat&#39;</span><span class="p">,</span> <span class="s1">&#39;yhat_lower&#39;</span><span class="p">,</span> <span class="s1">&#39;yhat_upper&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>Prediccion completada
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>                    ds       yhat  yhat_lower  yhat_upper
-55 2026-06-15 16:15:00  12.092762   12.066270   12.122621
-56 2026-06-15 16:20:00  12.181057   12.153652   12.208354
-57 2026-06-15 16:25:00  12.286384   12.256700   12.312877
-58 2026-06-15 16:30:00  12.410113   12.382991   12.439497
-59 2026-06-15 16:35:00  12.553507   12.525929   12.581590
-60 2026-06-15 16:40:00  12.717705   12.689740   12.748274
-</code></pre></div>
-<h2 id="6-evaluacion">6. Evaluacion<a class="headerlink" href="#6-evaluacion" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">preds</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">[</span><span class="s1">&#39;yhat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">):]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">true</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<h2 id="6-prediccion-y-evaluacion">6. Prediccion y Evaluacion<a class="headerlink" href="#6-prediccion-y-evaluacion" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">true</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">preds</span><span class="p">))</span>
 <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
 <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">true</span> <span class="o">-</span> <span class="n">preds</span><span class="p">)</span> <span class="o">/</span> <span class="n">true</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESULTADOS PROPHET&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESULTADOS RANDOM FOREST&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE:  </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1167,41 +1220,96 @@ Rango test: 2026-06-15 16:25:00 a 2026-06-15 18:35:00
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reales:       </span><span class="si">{</span><span class="n">true</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>========================================
-RESULTADOS PROPHET
+RESULTADOS RANDOM FOREST
 ========================================
-RMSE: 0.1897
-MAE:  0.1763
-MAPE: 1.44%
-Predicciones: [11.82255344 11.83506673 11.85360866 11.87976086 11.91513628 11.96135823
- 12.02003964 12.09276239 12.18105719 12.28638397 12.41011303 12.55350712
- 12.71770455]
-Reales:       [11.96875    11.96       12.095      12.179      12.18       12.18
- 12.18       12.3005     12.33285714 12.47666667 12.5252381  12.57238095
- 12.564375  ]
+RMSE: 1.0681
+MAE:  0.5515
+MAPE: 3.87%
+Predicciones: [12.20565691 12.18609003 12.20566186 12.25181039 12.26155696 12.27301977
+ 12.2736065  12.2670415  12.25985216 12.26400435 12.26381435 12.26902027
+ 12.28987826]
+Reales:       [12.18       12.18       12.3005     12.33285714 12.47666667 12.5252381
+ 12.57238095 12.5595     12.54       12.45       12.45       15.44
+ 14.37      ]
 </code></pre></div>
-<h2 id="7-grafico">7. Grafico<a class="headerlink" href="#7-grafico" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Prophet - Prediccion Temperatura ESP32_01&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperatura (°C)&quot;</span><span class="p">)</span>
+<h2 id="7-baseline-comparativo-lag-1">7. Baseline comparativo (lag-1)<a class="headerlink" href="#7-baseline-comparativo-lag-1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Baseline: predecir el ultimo valor conocido (temp_lag_1)</span>
+<span class="n">baseline_preds</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;temp_lag_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">rmse_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">baseline_preds</span><span class="p">))</span>
+<span class="n">mae_b</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">baseline_preds</span><span class="p">)</span>
+<span class="n">mape_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">true</span> <span class="o">-</span> <span class="n">baseline_preds</span><span class="p">)</span> <span class="o">/</span> <span class="n">true</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BASELINE LAG-1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE: </span><span class="si">{</span><span class="n">rmse_b</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE:  </span><span class="si">{</span><span class="n">mae_b</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAPE: </span><span class="si">{</span><span class="n">mape_b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random Forest mejora RMSE en </span><span class="si">{</span><span class="p">(</span><span class="n">rmse_b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rmse</span><span class="p">)</span><span class="o">/</span><span class="n">rmse_b</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% vs baseline &quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>========================================
+BASELINE LAG-1
+========================================
+RMSE: 0.8829
+MAE:  0.3519
+MAPE: 2.38%
+
+Random Forest mejora RMSE en -21.0% vs baseline 
+</code></pre></div>
+<h2 id="8-importancia-de-features">8. Importancia de Features<a class="headerlink" href="#8-importancia-de-features" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+    <span class="s1">&#39;importance&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">feat_imp</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="n">feat_imp</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 10 Features - Random Forest&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Importancia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">fig2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
+<span class="n">feat_imp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>           feature  importance
+18  temp_rolling_3    0.675579
+0             hour    0.084380
+12      pres_lag_1    0.070855
+3       temp_lag_1    0.051431
+2        dayofweek    0.036223
+19  temp_rolling_5    0.025731
+4       temp_lag_2    0.010861
+6        hum_lag_1    0.008581
+14      pres_lag_3    0.007556
+5       temp_lag_3    0.005114
+</code></pre></div>
+<h2 id="9-grafico-prediccion-vs-real">9. Grafico prediccion vs real<a class="headerlink" href="#9-grafico-prediccion-vs-real" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Random Forest - Prediccion Temperatura ESP32_01&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tiempo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperatura (Â°C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="8-guardar-metricas">8. Guardar metricas<a class="headerlink" href="#8-guardar-metricas" title="Permanent link">&para;</a></h2>
+<h2 id="10-guardar-metricas">10. Guardar metricas<a class="headerlink" href="#10-guardar-metricas" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">metrics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span>
-    <span class="s1">&#39;modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Prophet&#39;</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;mape&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mape</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="s1">&#39;modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;mape&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mape</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">}])</span>
-<span class="n">metrics_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/jovyan/work/metrics_prophet.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metricas guardadas en metrics_prophet.csv&quot;</span><span class="p">)</span>
+<span class="n">metrics_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/jovyan/work/metrics_random_forest.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metricas guardadas en metrics_random_forest.csv&quot;</span><span class="p">)</span>
 <span class="n">metrics_df</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_prophet.csv
+<div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_random_forest.csv
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>    modelo    rmse     mae  mape
-0  Prophet  0.1897  0.1763  1.44
+<div class="highlight"><pre><span></span><code>          modelo    rmse     mae  mape
+0  Random Forest  1.0681  0.5515  3.87
 </code></pre></div>
 
 

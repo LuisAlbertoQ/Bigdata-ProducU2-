@@ -304,7 +304,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../04_modelo_prophet/" class="md-tabs__link">
+        <a href="../04_modelo_random_forest/" class="md-tabs__link">
           
   
   
@@ -651,14 +651,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_modelo_prophet/" class="md-nav__link">
+      <a href="../04_modelo_random_forest/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Prophet
+    Random Forest
   
 
     
@@ -679,14 +679,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_modelo_arima/" class="md-nav__link">
+      <a href="../05_modelo_mlp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ARIMA
+    MLP
   
 
     
@@ -929,7 +929,7 @@
 
 
 <h1 id="08-comparacion-de-modelos">08 - Comparacion de Modelos<a class="headerlink" href="#08-comparacion-de-modelos" title="Permanent link">&para;</a></h1>
-<p>Comparacion de Prophet, SARIMA, XGBoost y LSTM.</p>
+<p>Comparacion de 4 modelos ML prediccion t+10min con features completas.</p>
 <h2 id="1-cargar-metricas-de-todos-los-modelos">1. Cargar metricas de todos los modelos<a class="headerlink" href="#1-cargar-metricas-de-todos-los-modelos" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -952,6 +952,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros tras agregacion 5min: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;temp_lag_1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Target: temperatura 10 min en el futuro (2 pasos x 5 min)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;avg_temperatura&#39;</span><span class="p">]</span>
 <span class="n">df_bl</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_bl</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
 <span class="n">test_bl</span> <span class="o">=</span> <span class="n">df_bl</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
@@ -963,8 +965,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Baseline lag-1: RMSE=</span><span class="si">{</span><span class="n">rmse_bl</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, MAE=</span><span class="si">{</span><span class="n">mae_bl</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, MAPE=</span><span class="si">{</span><span class="n">mape_bl</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
 <span class="n">csvs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Prophet&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_prophet.csv&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;ARIMA&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_ARIMA.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_random_forest.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MLP&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_mlp.csv&#39;</span><span class="p">,</span>
     <span class="s1">&#39;XGBoost&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_xgboost.csv&#39;</span><span class="p">,</span>
     <span class="s1">&#39;LSTM&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/jovyan/work/metrics_lstm.csv&#39;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -987,22 +989,22 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">No se encontraron metricas. Ejecuta los notebooks 04-07 primero.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 65
-Baseline lag-1: RMSE=0.6037, MAE=0.2335, MAPE=1.65%
-Prophet: {&#39;modelo&#39;: &#39;Prophet&#39;, &#39;rmse&#39;: 0.1897, &#39;mae&#39;: 0.1763, &#39;mape&#39;: 1.44}
-ARIMA: {&#39;modelo&#39;: &#39;ARIMA&#39;, &#39;rmse&#39;: 0.1138, &#39;mae&#39;: 0.0796, &#39;mape&#39;: 0.68}
-XGBoost: {&#39;modelo&#39;: &#39;XGBoost&#39;, &#39;rmse&#39;: 0.4965, &#39;mae&#39;: 0.4424, &#39;mape&#39;: 3.57}
-LSTM: {&#39;modelo&#39;: &#39;LSTM&#39;, &#39;rmse&#39;: 0.3959, &#39;mae&#39;: 0.3872, &#39;mape&#39;: 3.13}
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
+Baseline lag-1: RMSE=0.8829, MAE=0.3519, MAPE=2.38%
+Random Forest: {&#39;modelo&#39;: &#39;Random Forest&#39;, &#39;rmse&#39;: 1.0681, &#39;mae&#39;: 0.5515, &#39;mape&#39;: 3.87}
+MLP: {&#39;modelo&#39;: &#39;MLP&#39;, &#39;rmse&#39;: 0.3445, &#39;mae&#39;: 0.3245, &#39;mape&#39;: 2.61}
+XGBoost: {&#39;modelo&#39;: &#39;XGBoost&#39;, &#39;rmse&#39;: 0.2055, &#39;mae&#39;: 0.1698, &#39;mape&#39;: 1.36}
+LSTM: {&#39;modelo&#39;: &#39;LSTM&#39;, &#39;rmse&#39;: 1.2668, &#39;mae&#39;: 0.8874, &#39;mape&#39;: 6.52}
 
 ==================================================
 TABLA COMPARATIVA
 ==================================================
           modelo   rmse    mae  mape
-Baseline (lag-1) 0.6037 0.2335  1.65
-         Prophet 0.1897 0.1763  1.44
-           ARIMA 0.1138 0.0796  0.68
-         XGBoost 0.4965 0.4424  3.57
-            LSTM 0.3959 0.3872  3.13
+Baseline (lag-1) 0.8829 0.3519  2.38
+   Random Forest 1.0681 0.5515  3.87
+             MLP 0.3445 0.3245  2.61
+         XGBoost 0.2055 0.1698  1.36
+            LSTM 1.2668 0.8874  6.52
 </code></pre></div>
 <h2 id="2-grafico-de-barras-comparativo">2. Grafico de barras comparativo<a class="headerlink" href="#2-grafico-de-barras-comparativo" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -1029,8 +1031,8 @@ Baseline (lag-1) 0.6037 0.2335  1.65
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mejor modelo (RMSE): </span><span class="si">{</span><span class="n">mejor_rmse</span><span class="p">[</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con </span><span class="si">{</span><span class="n">mejor_rmse</span><span class="p">[</span><span class="s1">&#39;rmse&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mejor modelo (MAPE): </span><span class="si">{</span><span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comparacion</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()][</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con </span><span class="si">{</span><span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comparacion</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()][</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Mejor modelo (RMSE): ARIMA con 0.1138
-Mejor modelo (MAPE): ARIMA con 0.68%
+<div class="highlight"><pre><span></span><code>Mejor modelo (RMSE): XGBoost con 0.2055
+Mejor modelo (MAPE): XGBoost con 1.36%
 </code></pre></div>
 
 

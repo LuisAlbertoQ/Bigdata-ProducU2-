@@ -306,7 +306,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../04_modelo_prophet/" class="md-tabs__link">
+        <a href="../04_modelo_random_forest/" class="md-tabs__link">
           
   
   
@@ -730,14 +730,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_modelo_prophet/" class="md-nav__link">
+      <a href="../04_modelo_random_forest/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Prophet
+    Random Forest
   
 
     
@@ -758,14 +758,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_modelo_arima/" class="md-nav__link">
+      <a href="../05_modelo_mlp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ARIMA
+    MLP
   
 
     
@@ -951,18 +951,81 @@
 
 <h1 id="arquitectura-del-pipeline">Arquitectura del Pipeline<a class="headerlink" href="#arquitectura-del-pipeline" title="Permanent link">&para;</a></h1>
 <h2 id="diagrama-de-flujo">Diagrama de flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    Sensor["ESP32 + BME680"] --&gt;|datos cada 1 min| Supabase[("Supabase\nAlmacenamiento")]
-    Supabase --&gt;|httpx REST cada 10s| Producer["Python Producer\n5 estaciones simuladas"]
-    Producer --&gt;|estación normal| Kafka{{"Apache Kafka\niot.air_quality.streaming\n3 particiones"}}
-    Producer --&gt;|delay 5s - ESP32_05| Kafka
-    Kafka --&gt;|eventos fallidos| DLQ[("Dead Letter Queue\ndlq 1 partición")]
-    Kafka --&gt;|Spark Structured Streaming\nlatest offset| Spark["Spark Streaming 3.5.0\nVentana 1min / Slide 30s\nWatermark 30s / Trigger 10s\nOutputMode Update"]
-    Spark --&gt;|foreachBatch JDBC| TSDB[("TimescaleDB PG15\nHypertable: air_quality_metrics\nÍndices por estación + tiempo")]
-    TSDB --&gt;|SQL| ML["Machine Learning\nProphet · ARIMA(2,1,1)\nXGBoost · LSTM\nGPU RTX 4050 (CUDA 12.9)"]
-    TSDB --&gt;|SQL| Grafana[("Grafana 10.4.0\n7 paneles\nRefresh 10s")]
-    ML --&gt;|predicciones| Grafana
-    ML --&gt;|métricas CSV| Compare[("Comparativa\nNotebook 08")]</code></pre>
+<pre class="mermaid"><code>graph LR
+    %% ---------------- CAPA 1: CAPTURA ----------------
+    subgraph capa_captura [Físico / Captura]
+        subgraph sensor_group [Sensores Reales]
+            esp32[ESP32 + BME680]
+        end
+        style sensor_group fill:#eef,stroke:#333,stroke-width:4px;
+    end
+
+    %% ---------------- CAPA 2: ALMACENAMIENTO ----------------
+    subgraph capa_supabase [Almacenamiento Histórico]
+        supabase[Supabase &lt;br&gt;Rest API via httpx]
+        style capa_supabase fill:#e6f2ff,stroke:#333;
+    end
+
+    %% ---------------- CAPA 3: INGESTA ----------------
+    subgraph capa_producer [Simulación / Ingesta]
+        python_producer["Python Producer &lt;br&gt;(Lee Supabase + Simula 5 estaciones)"]
+        style capa_producer fill:#fdf,stroke:#333;
+    end
+
+    %% ---------------- CAPA 4: BROKER ----------------
+    subgraph capa_kafka [Broker de Mensajería]
+        kafka["Apache Kafka &lt;br&gt;Topic: iot.air_quality.streaming (3 particiones) &lt;br&gt;DLQ: iot.air_quality.streaming.dlq"]
+        style capa_kafka fill:#ffe,stroke:#333;
+    end
+
+    %% ---------------- CAPA 5: STREAMING ----------------
+    subgraph capa_spark [Procesamiento Stream]
+        spark_streaming[Spark Streaming &lt;br&gt;Ventana 1min / Slide 30s / Watermark 30s &lt;br&gt;Trigger 10s / ForeachBatch / OutputMode Update]
+        style capa_spark fill:#e5e,stroke:#333;
+    end
+
+    %% ---------------- CAPA 6: SINK DE TIEMPO ----------------
+    subgraph capa_timescale [Base de Datos Temporal]
+        timescaledb[TimescaleDB &lt;br&gt;Hypertable para Series de Tiempo]
+        style capa_timescale fill:#ede,stroke:#333;
+    end
+
+    %% ---------------- CAPA 7: VISUALIZACIÓN ----------------
+    subgraph capa_grafana [Observabilidad / BI]
+        grafana[Grafana &lt;br&gt;7 Paneles de Monitoreo &lt;br&gt;Refresh 10s]
+        style capa_grafana fill:#efe,stroke:#333;
+    end
+
+    %% ---------------- CAPA 8: ML ----------------
+    subgraph capa_ml [Machine Learning / Exploración]
+        jupyter[Jupyter Lab &lt;br&gt;GPU RTX 4050 CUDA 12.9]
+        subgraph notebooks ["Modelos ML (4 Notebooks)"]
+            m1[Random Forest]
+            m2[MLP]
+            m3[XGBoost]
+            m4[LSTM]
+        end
+        style capa_ml fill:#fcf,stroke:#333;
+        jupyter --&gt; m1 &amp; m2 &amp; m3 &amp; m4
+    end
+
+    %% ---------------- CONEXIONES PRINCIPALES ----------------
+    %% Datos Físicos -&gt; Almacenamiento
+    esp32 -- "datos reales (1 min)" --&gt; supabase
+
+    %% Almacenamiento -&gt; Ingesta -&gt; Broker
+    supabase -- "lee históricos" --&gt; python_producer
+    python_producer -- "simula 5 estaciones" --&gt; kafka
+
+    %% Broker -&gt; Spark -&gt; Sink -&gt; BI
+    kafka -- "suscripción streaming" --&gt; spark_streaming
+    spark_streaming -- "sink de tiempo" --&gt; timescaledb
+    timescaledb -- "7 paneles" --&gt; grafana
+
+    %% ---------------- CONEXIONES ML ----------------
+    %% Acceso de Jupyter y ML a los datos históricos y de streaming
+    jupyter -.-&gt; supabase
+    jupyter -.-&gt; timescaledb</code></pre>
 <h2 id="componentes-docker">Componentes Docker<a class="headerlink" href="#componentes-docker" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TB
     subgraph "Docker Compose - iot-network"

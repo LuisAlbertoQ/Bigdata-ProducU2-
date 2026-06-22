@@ -304,7 +304,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="04_modelo_prophet/" class="md-tabs__link">
+        <a href="04_modelo_random_forest/" class="md-tabs__link">
           
   
   
@@ -739,14 +739,14 @@
   
   
     <li class="md-nav__item">
-      <a href="04_modelo_prophet/" class="md-nav__link">
+      <a href="04_modelo_random_forest/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Prophet
+    Random Forest
   
 
     
@@ -767,14 +767,14 @@
   
   
     <li class="md-nav__item">
-      <a href="05_modelo_arima/" class="md-nav__link">
+      <a href="05_modelo_mlp/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ARIMA
+    MLP
   
 
     
@@ -1017,8 +1017,8 @@ TimescaleDB:<span class="w"> </span>localhost:5432<span class="w">  </span><span
 </tr>
 <tr>
 <td>ML</td>
-<td>Prophet, ARIMA, XGBoost, LSTM</td>
-<td>Predicción de temperatura con GPU RTX 4050</td>
+<td>Random Forest, MLP, XGBoost, LSTM</td>
+<td>Predicción de temperatura t+10min con 20 features (temp, hum, iaq, pres, eco2 + lags)</td>
 </tr>
 <tr>
 <td>Orquestación</td>
@@ -1054,28 +1054,28 @@ TimescaleDB:<span class="w"> </span>localhost:5432<span class="w">  </span><span
 </tr>
 <tr>
 <td>04</td>
-<td>Prophet</td>
-<td>Predicción de temperatura con Prophet</td>
+<td>Random Forest</td>
+<td>Predicción t+10min con 20 features (bagging)</td>
 </tr>
 <tr>
 <td>05</td>
-<td>ARIMA</td>
-<td>Predicción con ARIMA(2,1,1)</td>
+<td>MLP</td>
+<td>Predicción t+10min con red feed-forward (GPU)</td>
 </tr>
 <tr>
 <td>06</td>
 <td>XGBoost</td>
-<td>Predicción con XGBoost (GPU)</td>
+<td>Predicción t+10min con gradient boosting (GPU)</td>
 </tr>
 <tr>
 <td>07</td>
 <td>LSTM</td>
-<td>Predicción con LSTM multivariado (GPU)</td>
+<td>Predicción t+10min con LSTM multivariado (GPU)</td>
 </tr>
 <tr>
 <td>08</td>
 <td>Comparación</td>
-<td>Comparativa de los 4 modelos + baseline</td>
+<td>Comparativa de los 4 modelos ML + baseline t+10min</td>
 </tr>
 </tbody>
 </table>
@@ -1091,39 +1091,39 @@ TimescaleDB:<span class="w"> </span>localhost:5432<span class="w">  </span><span
 </thead>
 <tbody>
 <tr>
-<td><strong>ARIMA (2,1,1)</strong></td>
-<td><strong>0.0861</strong></td>
-<td><strong>0.62</strong></td>
-<td><strong>−1%</strong></td>
+<td><strong>XGBoost</strong> 🏆</td>
+<td><strong>0.2055</strong></td>
+<td><strong>1.36%</strong></td>
+<td><strong>−77%</strong></td>
+</tr>
+<tr>
+<td>MLP</td>
+<td>0.3445</td>
+<td>2.61%</td>
+<td>−61%</td>
 </tr>
 <tr>
 <td>Baseline (lag-1)</td>
-<td>0.0870</td>
-<td>0.45</td>
+<td>0.8829</td>
+<td>2.38%</td>
 <td>—</td>
 </tr>
 <tr>
-<td>Prophet</td>
-<td>0.1351</td>
-<td>0.96</td>
-<td>+55%</td>
+<td>Random Forest</td>
+<td>1.0681</td>
+<td>3.87%</td>
+<td>+21%</td>
 </tr>
 <tr>
 <td>LSTM</td>
-<td>0.2056</td>
-<td>1.45</td>
-<td>+136%</td>
-</tr>
-<tr>
-<td>XGBoost</td>
-<td>0.3170</td>
-<td>2.07</td>
-<td>+264%</td>
+<td>1.2668</td>
+<td>6.52%</td>
+<td>+43%</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>ARIMA(2,1,1) es el mejor modelo. Con ~55 registros (agregación a 5 min), modelos complejos overfittean.</p>
+<p><strong>XGBoost</strong> ganador con 20 features (temp, humedad, IAQ, presión, eCO2 + lags). Modelos con GPU (XGBoost, MLP) superan al baseline; Random Forest y LSTM overfittean con ~50 muestras.</p>
 </blockquote>
 
 
