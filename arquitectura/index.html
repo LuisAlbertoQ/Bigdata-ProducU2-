@@ -996,8 +996,14 @@
         style capa_grafana fill:#efe,stroke:#333;
     end
 
-    %% ---------------- CAPA 8: ML ----------------
-    subgraph capa_ml [Machine Learning / Exploración]
+    %% ---------------- CAPA 8: EXPLORACIÓN ----------------
+    subgraph capa_exploracion [Exploración Inicial]
+        nb01[Notebook 01: Exploración Supabase]
+        style capa_exploracion fill:#fcf,stroke:#333;
+    end
+
+    %% ---------------- CAPA 9: ML ----------------
+    subgraph capa_ml [Machine Learning]
         jupyter[Jupyter Lab &lt;br&gt;GPU RTX 4050 CUDA 12.9]
         subgraph notebooks ["Modelos ML (4 Notebooks)"]
             m1[Random Forest]
@@ -1005,8 +1011,12 @@
             m3[XGBoost]
             m4[LSTM]
         end
+        subgraph comparacion [Comparación]
+            m5[Notebook 08: Comparativa]
+        end
         style capa_ml fill:#fcf,stroke:#333;
         jupyter --&gt; m1 &amp; m2 &amp; m3 &amp; m4
+        m1 &amp; m2 &amp; m3 &amp; m4 --&gt; m5
     end
 
     %% ---------------- CONEXIONES PRINCIPALES ----------------
@@ -1023,8 +1033,9 @@
     timescaledb -- "7 paneles" --&gt; grafana
 
     %% ---------------- CONEXIONES ML ----------------
-    %% Acceso de Jupyter y ML a los datos históricos y de streaming
-    jupyter -.-&gt; supabase
+    %% Notebook 01 explora Supabase directamente
+    nb01 -- "consulta histórica" --&gt; supabase
+    %% Notebooks ML (04-08) leen datos agregados desde TimescaleDB
     jupyter -.-&gt; timescaledb</code></pre>
 <h2 id="componentes-docker">Componentes Docker<a class="headerlink" href="#componentes-docker" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TB
