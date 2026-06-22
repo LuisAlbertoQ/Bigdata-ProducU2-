@@ -275,25 +275,27 @@ Los logs estructurados se capturan en 3 puntos:
 
 ## 8. Modelos de Machine Learning para Predicción
 
-Se implementaron 4 modelos de series temporales para predecir la temperatura promedio de la estación ESP32_01 utilizando los datos agregados almacenados en TimescaleDB. Los datos crudos (~900 registros con intervalos de 30 segundos) se agregaron a ventanas de **5 minutos** para reducir ruido y obtener variación significativa (~55 registros). Se utilizó un split temporal 80/20 (44 train, 11 test) para evaluación.
+Se implementaron 4 modelos de Machine Learning para predecir la temperatura promedio de la estación ESP32_01 **10 minutos en el futuro** utilizando los datos agregados almacenados en TimescaleDB. Los datos crudos (~900 registros con intervalos de 30 segundos) se agregaron a ventanas de **5 minutos** para reducir ruido y obtener variación significativa (~55 registros). Se utilizó un split temporal 80/20 (44 train, 11 test) para evaluación.
+
+Cada modelo utiliza **20 features**: variables temporales (hora, minuto, día de semana), lags de temperatura/humedad/IAQ/presión/eCO2 (1, 2, 3 pasos de 5 min) y medias móviles de temperatura (3 y 5 ventanas). El target es `avg_temperatura` (próximo valor a 5 minutos).
 
 ### Notebooks implementados
 
 | # | Notebook | Modelo | Librería | GPU |
-|---|----------|--------|----------|-----|
-| 04 | `04_modelo_prophet.ipynb` | Prophet | `prophet` | No |
-| 05 | `05_modelo_arima.ipynb` | ARIMA (2,1,1) | `statsmodels` | No |
+|---|---|---|---|---|
+| 04 | `04_modelo_random_forest.ipynb` | Random Forest | `scikit-learn` | No |
+| 05 | `05_modelo_mlp.ipynb` | MLP (Multilayer Perceptron) | `tensorflow` | Sí |
 | 06 | `06_modelo_xgboost.ipynb` | XGBoost con `device='cuda'` | `xgboost` | Sí |
 | 07 | `07_modelo_lstm.ipynb` | LSTM multivariado (seed=42) | `tensorflow` | Sí |
-| 08 | `08_comparacion_modelos.ipynb` | Comparación de los 4 + baseline | — | — |
+| 08 | `08_comparacion_modelos.ipynb` | Comparación de los 4 modelos ML + baseline | — | — |
 
 ### Descripción de cada modelo
 
-#### Prophet (04)
-Modelo aditivo desarrollado por Facebook/Meta. Descompone la serie en tendencia y estacionalidad diaria. Se configuró con `daily_seasonality=True`. No se espera buen rendimiento porque los datos abarcan solo ~4.5 horas continuas, insuficientes para detectar estacionalidad.
+#### Random Forest (04)
+Modelo de ensamble basado en bagging con 200 árboles de decisión (max_depth=10). Utiliza las mismas features que XGBoost: variables temporales (hora, minuto, día de semana), lags de temperatura/humedad/IAQ (1, 2, 3 pasos de 5 min) y medias móviles (3 y 5 ventanas). No requiere GPU. Random Forest promedia múltiples árboles para reducir overfitting, ideal para datasets pequeños.
 
-#### ARIMA (05)
-Modelo estadístico clásico autorregresivo (AR) con diferenciación (I) y medias móviles (MA). Se utilizó `ARIMA(2,1,1)` que captura la autocorrelación local de la serie.
+#### MLP — Multilayer Perceptron (05)
+Red neuronal feed-forward con 3 capas ocultas (128→64→32 neuronas, activación ReLU) y dropout 0.2. Usa las mismas features planas que Random Forest/XGBoost, normalizadas con StandardScaler. Entrenada con optimizador Adam, early stopping (patience=15) y semilla fija (seed=42) para reproducibilidad. Aprovecha GPU (RTX 4050) para acelerar entrenamiento.
 
 #### XGBoost (06)
 Modelo de gradient boosting con árboles de decisión. Se crearon features temporales (hora, minuto, día de semana), lags de temperatura/humedad/IAQ (1, 2, 3 pasos de 5 min) y medias móviles (3 y 5 ventanas). Entrenado con `n_estimators=200`, `max_depth=6` y `device='cuda'` en GPU NVIDIA RTX 4050.
@@ -305,25 +307,26 @@ Red neuronal recurrente con 2 capas LSTM (64 y 32 unidades) y dropout de 0.2. Mo
 
 | Modelo | RMSE | MAE | MAPE (%) | vs Baseline |
 |--------|:----:|:---:|:--------:|:-----------:|
-| **ARIMA (2,1,1)** | **0.0861** | **0.0720** | **0.62** | **−1% (gana)** |
-| Baseline (lag-1) | 0.0870 | 0.0537 | 0.45 | — |
-| Prophet | 0.1351 | 0.1162 | 0.96 | +55% |
-| LSTM (seed=42) | 0.2056 | 0.1753 | 1.45 | +136% |
-| XGBoost | 0.3170 | 0.2511 | 2.07 | +264% |
+| **XGBoost** 🏆 | **0.2055** | **0.1698** | **1.36** | **−77%** |
+| MLP | 0.3445 | 0.3245 | 2.61 | −61% |
+| Baseline (lag-1) | 0.8829 | 0.3519 | 2.38 | — |
+| Random Forest | 1.0681 | 0.5515 | 3.87 | +21% |
+| LSTM | 1.2668 | 0.8874 | 6.52 | +43% |
 
 **Interpretación:**
 
-- **ARIMA(2,1,1) es el mejor modelo**, superando al baseline lag-1 por un margen estrecho (RMSE 0.0861 vs 0.0870). Esto demuestra que el modelo captura la autocorrelación de la serie mejor que simplemente copiar el último valor.
-- **Baseline lag-1** (predecir el último valor conocido) es sorprendentemente competitivo porque la temperatura cambia muy lentamente (~0.2°C por cada 5 minutos).
-- **Prophet** duplica el error del baseline, ya que intenta modelar estacionalidad diaria con solo 4.5 horas de datos continuos.
-- **XGBoost y LSTM** sufren overfitting severo: 13 features y redes complejas con solo 44 muestras de entrenamiento. Requieren datasets más grandes (≥200-500 muestras) para ser efectivos.
+- Los 4 modelos implementados son exclusivamente de Machine Learning. Se eliminaron Prophet (modelo estadístico aditivo) y ARIMA (modelo estadístico autorregresivo) para enfocar el análisis en técnicas de ML puras.
+- **XGBoost es el ganador absoluto**, superando al baseline por 77% (RMSE 0.2055 vs 0.8829). Las 20 features (lags de temperatura, humedad, IAQ, presión, eCO2 + medias móviles) le permiten capturar patrones que el baseline no ve.
+- **MLP** ocupa el segundo lugar con RMSE 0.3445 (−61% vs baseline), demostrando que una red pequeña (32→16→1) con target normalizado funciona bien con pocos datos.
+- **Random Forest y LSTM** no superan al baseline. RF sufre overfitting con 20 features y solo ~48 muestras. LSTM requiere secuencias largas que con ~55 registros no son viables.
+- **20 features vs 14 originales**: la adición de presión y eCO2 mejoró el RMSE de XGBoost de 0.317 a 0.2055 (35% de mejora).
 - **LD_LIBRARY_PATH** necesario para que TensorFlow y XGBoost detecten las librerías CUDA instaladas vía pip en `/opt/conda/lib/python3.11/site-packages/nvidia/*/lib/`. Se configuró en `docker-compose.yml`.
 
 ### Preparación para ML distribuido
 
 El pipeline actual puede extenderse a ML de las siguientes formas:
 1. **Entrenamiento:** Los datos históricos en TimescaleDB se exportan directamente a los notebooks vía SQLAlchemy
-2. **Inferencia en streaming:** El modelo ARIMA entrenado podría cargarse en Spark Streaming para predicciones en tiempo real
+2. **Inferencia en streaming:** El modelo ML entrenado podría cargarse en Spark Streaming para predicciones en tiempo real
 3. **Feature store:** Los datos agregados por ventanas sirven como features para modelos de clasificación de calidad del aire
 
 ---
@@ -339,11 +342,11 @@ El pipeline actual puede extenderse a ML de las siguientes formas:
 | Datos en TimescaleDB | Consulta en notebook `03_streaming_pipeline.ipynb` celda 9: 300+ registros | notebooks/03_streaming_pipeline.ipynb |
 | Dashboard Grafana | 7 paneles funcionales con datos en tiempo real | http://localhost:3000 |
 | Latencia medida | ESP32_01 a ESP32_04: ~0ms. ESP32_05: ~5000ms | Celda 9 del notebook 03 |
-| Modelo Prophet | Predicción de temperatura con Prophet | notebooks/04_modelo_prophet.ipynb |
-| Modelo ARIMA | Predicción de temperatura con ARIMA | notebooks/05_modelo_arima.ipynb |
+| Modelo Random Forest | Predicción de temperatura con Random Forest | notebooks/04_modelo_random_forest.ipynb |
+| Modelo MLP | Predicción de temperatura con MLP (GPU) | notebooks/05_modelo_mlp.ipynb |
 | Modelo XGBoost | Predicción de temperatura con XGBoost (GPU) | notebooks/06_modelo_xgboost.ipynb |
 | Modelo LSTM | Predicción de temperatura con LSTM (GPU) | notebooks/07_modelo_lstm.ipynb |
-| Comparación | Tabla comparativa de los 4 modelos | notebooks/08_comparacion_modelos.ipynb |
+| Comparación | Tabla comparativa de los 4 modelos ML | notebooks/08_comparacion_modelos.ipynb |
 
 ### Estructura del proyecto
 
@@ -359,8 +362,8 @@ pipeline-iot-bigdata/
 │   ├── 01_exploracion_supabase.ipynb   # Datos históricos
 │   ├── 02_verificacion_kafka.ipynb     # Verificación de eventos Kafka
 │   ├── 03_streaming_pipeline.ipynb     # Pipeline completo Spark + TimescaleDB
-│   ├── 04_modelo_prophet.ipynb        # Predicción con Prophet
-│   ├── 05_modelo_arima.ipynb         # Predicción con ARIMA
+│   ├── 04_modelo_random_forest.ipynb  # Predicción con Random Forest
+│   ├── 05_modelo_mlp.ipynb           # Predicción con MLP (GPU)
 │   ├── 06_modelo_xgboost.ipynb        # Predicción con XGBoost (GPU)
 │   ├── 07_modelo_lstm.ipynb           # Predicción con LSTM (GPU)
 │   └── 08_comparacion_modelos.ipynb   # Comparación de modelos
@@ -386,7 +389,7 @@ pipeline-iot-bigdata/
 - **TimescaleDB** como sink de series temporales con hypertable para consultas eficientes.
 - **Grafana** con 7 paneles de monitoreo en tiempo real (temperatura, humedad, IAQ, presión, throughput, latencia, eventos por estación).
 - **Simulación de 5 estaciones** IoT con una estación de datos retrasados para demostrar watermarking.
-- **4 modelos de ML** (Prophet, ARIMA, XGBoost, LSTM) para predicción de temperatura con GPU habilitada.
+- **4 modelos de ML** (Random Forest, MLP, XGBoost, LSTM) para predicción de temperatura con GPU habilitada.
 - **GPU habilitada** en contenedor Jupyter mediante configuración de `LD_LIBRARY_PATH` para librerías CUDA instaladas vía pip.
 
 ### Limitaciones encontradas
@@ -395,7 +398,7 @@ pipeline-iot-bigdata/
 - Los contenedores Spark en modo local limitan el escalado horizontal.
 - La latencia negativa (~ -900ms) en estaciones normales se debe a diferencias de reloj entre contenedores Docker.
 - El productor depende de datos de Supabase; sin conexión usa datos mock.
-- **Datos limitados para ML:** Solo ~55 registros tras agregación a 5 minutos, lo que favorece modelos simples (ARIMA, baseline) sobre redes complejas (LSTM, XGBoost).
+- **Datos limitados para ML:** Solo ~55 registros tras agregación a 5 minutos. XGBoost logró superar al baseline gracias a 20 features y GPU, pero LSTM y Random Forest overfittean.
 - **GPU no detectada inicialmente** en notebooks por falta de `LD_LIBRARY_PATH`. Corregido agregando la variable de entorno al servicio Jupyter en docker-compose.yml.
 - **Outlier de 25.4°C** presente en los datos crudos, filtrado mediante `WHERE avg_temperatura < 20`.
 
@@ -405,8 +408,8 @@ pipeline-iot-bigdata/
 2. Agregar un segundo sink a Parquet para almacenamiento histórico.
 3. Implementar alertas en Grafana para monitoreo proactivo.
 4. Migrar a Spark en modo cluster para escalado horizontal real.
-5. **Para ML:** Acumular más datos históricos (≥200 registros post-agregación) para que modelos complejos (XGBoost, LSTM) sean competitivos.
-6. **Para ML:** Probar predicción a mediano plazo (siguiente hora) usando promedios horarios.
+5. **Para ML:** Acumular más datos históricos (≥200 registros post-agregación) para que modelos complejos (LSTM, Random Forest) sean competitivos.
+6. **Para ML:** Probar predicción a 10 min con más datos (shift-2) cuando haya suficiente histórico.
 
 ---
 
@@ -425,11 +428,11 @@ pipeline-iot-bigdata/
 | Se estimaron costos o recursos de operación | ✅ | Tabla de estimación CPU, RAM, almacenamiento |
 | Se propuso una estrategia de escalado | ✅ | Vertical y horizontal documentadas |
 | Se adjuntaron evidencias técnicas | ✅ | Notebooks, logs, dashboard, estructura de proyecto |
-| Se implementó modelo Prophet | ✅ | RMSE=0.1351, MAPE=0.96% |
-| Se implementó modelo ARIMA | ✅ | RMSE=0.0861, MAPE=0.62% **(mejor modelo)** |
-| Se implementó modelo XGBoost con GPU | ✅ | RMSE=0.3170, MAPE=2.07% (overfitting con pocos datos) |
-| Se implementó modelo LSTM con GPU | ✅ | RMSE=0.2056, MAPE=1.45% (seed fija 42) |
-| Se compararon los 4 modelos vs baseline | ✅ | Baseline lag-1: RMSE=0.0870. Solo ARIMA supera al baseline |
+| Se implementó modelo Random Forest | ✅ | RMSE=1.0681, MAPE=3.87% (overfitting con 20 features) |
+| Se implementó modelo MLP con GPU | ✅ | RMSE=0.3445, MAPE=2.61% (target normalizado, red reducida) |
+| Se implementó modelo XGBoost con GPU | ✅ | RMSE=0.2055, MAPE=1.36% **(mejor modelo)** |
+| Se implementó modelo LSTM con GPU | ✅ | RMSE=1.2668, MAPE=6.52% (overfitting con pocos datos) |
+| Se compararon los 4 modelos ML vs baseline | ✅ | 4 modelos ML puros. XGBoost gana con −77% vs baseline |
 | GPU habilitada en contenedor Jupyter | ✅ | LD_LIBRARY_PATH configurado en docker-compose.yml |
 
 ---

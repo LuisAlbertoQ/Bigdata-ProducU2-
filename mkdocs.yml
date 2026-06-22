@@ -63,8 +63,8 @@ nav:
     - Verificación Kafka: 02_verificacion_kafka.md
     - Pipeline Streaming: 03_streaming_pipeline.md
   - Machine Learning:
-    - Prophet: 04_modelo_prophet.md
-    - ARIMA: 05_modelo_arima.md
+    - Random Forest: 04_modelo_random_forest.md
+    - MLP: 05_modelo_mlp.md
     - XGBoost: 06_modelo_xgboost.md
     - LSTM: 07_modelo_lstm.md
     - Comparación: 08_comparacion_modelos.md

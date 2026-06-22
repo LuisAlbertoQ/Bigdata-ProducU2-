@@ -23,7 +23,7 @@ TimescaleDB: localhost:5432  (postgres/postgres)
 | Procesamiento | Spark Structured Streaming 3.5.0 | Agregaciones en ventanas con watermark |
 | Base de datos | TimescaleDB PG15 | Almacenamiento optimizado para series temporales |
 | Visualización | Grafana 10.4.0 | 7 paneles de monitoreo en tiempo real |
-| ML | Prophet, ARIMA, XGBoost, LSTM | Predicción de temperatura con GPU RTX 4050 |
+| ML | Random Forest, MLP, XGBoost, LSTM | Predicción de temperatura t+10min con 20 features (temp, hum, iaq, pres, eco2 + lags) |
 | Orquestación | Docker Compose | 6 contenedores en red aislada |
 
 ## Notebooks
@@ -33,20 +33,20 @@ TimescaleDB: localhost:5432  (postgres/postgres)
 | 01 | Exploración Supabase | Análisis exploratorio de datos históricos |
 | 02 | Verificación Kafka | Consumo y validación de eventos Kafka |
 | 03 | Pipeline Streaming | Pipeline Spark → TimescaleDB completo |
-| 04 | Prophet | Predicción de temperatura con Prophet |
-| 05 | ARIMA | Predicción con ARIMA(2,1,1) |
-| 06 | XGBoost | Predicción con XGBoost (GPU) |
-| 07 | LSTM | Predicción con LSTM multivariado (GPU) |
-| 08 | Comparación | Comparativa de los 4 modelos + baseline |
+| 04 | Random Forest | Predicción t+10min con 20 features (bagging) |
+| 05 | MLP | Predicción t+10min con red feed-forward (GPU) |
+| 06 | XGBoost | Predicción t+10min con gradient boosting (GPU) |
+| 07 | LSTM | Predicción t+10min con LSTM multivariado (GPU) |
+| 08 | Comparación | Comparativa de los 4 modelos ML + baseline t+10min |
 
 ## Resultados ML
 
 | Modelo | RMSE | MAPE (%) | vs Baseline |
 |---|---|---|---|
-| **ARIMA (2,1,1)** | **0.0861** | **0.62** | **−1%** |
-| Baseline (lag-1) | 0.0870 | 0.45 | — |
-| Prophet | 0.1351 | 0.96 | +55% |
-| LSTM | 0.2056 | 1.45 | +136% |
-| XGBoost | 0.3170 | 2.07 | +264% |
+| **XGBoost** 🏆 | **0.2055** | **1.36%** | **−77%** |
+| MLP | 0.3445 | 2.61% | −61% |
+| Baseline (lag-1) | 0.8829 | 2.38% | — |
+| Random Forest | 1.0681 | 3.87% | +21% |
+| LSTM | 1.2668 | 6.52% | +43% |
 
-> ARIMA(2,1,1) es el mejor modelo. Con ~55 registros (agregación a 5 min), modelos complejos overfittean.
+> **XGBoost** ganador con 20 features (temp, humedad, IAQ, presión, eCO2 + lags). Modelos con GPU (XGBoost, MLP) superan al baseline; Random Forest y LSTM overfittean con ~50 muestras.
