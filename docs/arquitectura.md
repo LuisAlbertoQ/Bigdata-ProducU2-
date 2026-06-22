@@ -48,8 +48,14 @@ graph LR
         style capa_grafana fill:#efe,stroke:#333;
     end
 
-    %% ---------------- CAPA 8: ML ----------------
-    subgraph capa_ml [Machine Learning / Exploración]
+    %% ---------------- CAPA 8: EXPLORACIÓN ----------------
+    subgraph capa_exploracion [Exploración Inicial]
+        nb01[Notebook 01: Exploración Supabase]
+        style capa_exploracion fill:#fcf,stroke:#333;
+    end
+
+    %% ---------------- CAPA 9: ML ----------------
+    subgraph capa_ml [Machine Learning]
         jupyter[Jupyter Lab <br>GPU RTX 4050 CUDA 12.9]
         subgraph notebooks ["Modelos ML (4 Notebooks)"]
             m1[Random Forest]
@@ -57,8 +63,12 @@ graph LR
             m3[XGBoost]
             m4[LSTM]
         end
+        subgraph comparacion [Comparación]
+            m5[Notebook 08: Comparativa]
+        end
         style capa_ml fill:#fcf,stroke:#333;
         jupyter --> m1 & m2 & m3 & m4
+        m1 & m2 & m3 & m4 --> m5
     end
 
     %% ---------------- CONEXIONES PRINCIPALES ----------------
@@ -75,8 +85,9 @@ graph LR
     timescaledb -- "7 paneles" --> grafana
 
     %% ---------------- CONEXIONES ML ----------------
-    %% Acceso de Jupyter y ML a los datos históricos y de streaming
-    jupyter -.-> supabase
+    %% Notebook 01 explora Supabase directamente
+    nb01 -- "consulta histórica" --> supabase
+    %% Notebooks ML (04-08) leen datos agregados desde TimescaleDB
     jupyter -.-> timescaledb
 ```
 
