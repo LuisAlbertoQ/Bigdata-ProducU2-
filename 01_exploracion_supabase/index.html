@@ -1141,29 +1141,29 @@ URL: https://ffwjdoguzaqpafuwaeam.supabase.co
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Total registros cargados: 100
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>     id estacion  temperatura   humedad  presion    altura    gas        iaq  \
-0  1243   grupo1     14.30466  34.06216   648.52  3608.958  23604   5.117658   
-1  1242   grupo1     14.38644  33.88734   648.51  3609.078  22156  25.000000   
-2  1241   grupo1     14.58168  34.23957   648.49  3609.317  20209  25.000000   
-3  1240   grupo1     14.84761  33.02026   648.47  3609.556  18744  25.000000   
-4  1239   grupo1     15.38707  32.31005   648.49  3609.317  16068  25.000000   
-5  1238   grupo1     16.87045  33.54422   648.42  3610.154  14807  25.000000   
-6  1237   grupo1     16.67330  30.35186   648.41  3610.273  14600  23.240700   
-7  1236   grupo1     17.30564  31.47491   648.40  3610.392  12301  17.625440   
-8  1235   grupo1     17.01816  31.86087   648.39  3610.512  10646  15.695670   
-9  1234   grupo1     17.04320  29.26820   648.39  3610.512   9653  25.000000   
+<div class="highlight"><pre><span></span><code>     id estacion  temperatura   humedad  presion    altura    gas       iaq  \
+0  4429   grupo1     9.704172  21.10805   647.68  3619.001  28828  69.45975   
+1  4428   grupo1     9.704806  21.40956   647.69  3618.881  28207  67.95222   
+2  4427   grupo1     9.688326  21.10719   647.68  3619.001  28188  69.46407   
+3  4426   grupo1     9.673429  21.00437   647.67  3619.121  28284  69.97815   
+4  4425   grupo1     9.668993  20.88694   647.68  3619.001  27981  70.56532   
+5  4424   grupo1     9.673746  21.02988   647.68  3619.001  27236  69.85061   
+6  4423   grupo1     9.671844  21.09608   647.69  3618.881  26715  69.51958   
+7  4422   grupo1     9.676916  20.95359   647.69  3618.881  26462  70.23205   
+8  4421   grupo1     9.689276  20.73025   647.70  3618.761  26329  71.34873   
+9  4420   grupo1     9.669310  20.84112   647.69  3618.881  25890  70.79438   
 
        eco2       voc calidad_aire                        created_at  
-0  447.0825  0.750765    Excelente   2026-06-15T22:00:27.63986-05:00  
-1  630.0000  1.725000    Excelente   2026-06-15T21:59:27.56746-05:00  
-2  630.0000  1.725000    Excelente  2026-06-15T21:58:27.621025-05:00  
-3  630.0000  1.725000    Excelente  2026-06-15T21:57:27.565641-05:00  
-4  630.0000  1.725000    Excelente  2026-06-15T21:56:27.570609-05:00  
-5  630.0000  1.725000    Excelente  2026-06-15T21:55:27.898129-05:00  
-6  613.8145  1.638794    Excelente  2026-06-15T21:52:55.081863-05:00  
-7  562.1540  1.363646    Excelente  2026-06-15T21:51:54.775755-05:00  
-8  544.4001  1.269088    Excelente  2026-06-15T21:50:54.796876-05:00  
-9  630.0000  1.725000    Excelente  2026-06-15T21:49:54.813687-05:00  
+0  1039.030  3.903528        Buena  2026-06-23T08:32:53.117839-05:00  
+1  1025.161  3.829659        Buena  2026-06-23T08:31:53.105134-05:00  
+2  1039.069  3.903739        Buena  2026-06-23T08:30:53.194604-05:00  
+3  1043.799  3.928929        Buena  2026-06-23T08:29:53.101937-05:00  
+4  1049.201  3.957701        Buena  2026-06-23T08:28:53.132864-05:00  
+5  1042.626  3.922680        Buena  2026-06-23T08:27:53.109527-05:00  
+6  1039.580  3.906459        Buena  2026-06-23T08:26:53.154751-05:00  
+7  1046.135  3.941370        Buena  2026-06-23T08:25:53.093411-05:00  
+8  1056.408  3.996088        Buena  2026-06-23T08:24:53.158866-05:00  
+9  1051.308  3.968925        Buena  2026-06-23T08:23:53.402041-05:00  
 </code></pre></div>
 <h2 id="5-estadisticas-descriptivas">5. Estadisticas descriptivas<a class="headerlink" href="#5-estadisticas-descriptivas" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">numeric_possible</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad&quot;</span><span class="p">,</span> <span class="s2">&quot;presion&quot;</span><span class="p">,</span> <span class="s2">&quot;iaq&quot;</span><span class="p">,</span> <span class="s2">&quot;eco2&quot;</span><span class="p">,</span> <span class="s2">&quot;voc&quot;</span><span class="p">,</span> <span class="s2">&quot;VOC&quot;</span><span class="p">,</span> <span class="s2">&quot;gas&quot;</span><span class="p">,</span> <span class="s2">&quot;altura&quot;</span><span class="p">]</span>
@@ -1186,9 +1186,7 @@ URL: https://ffwjdoguzaqpafuwaeam.supabase.co
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Distribucion de calidad_aire:
 calidad_aire
-Severamente contaminada    62
-Altamente contaminada      24
-Excelente                  14
+Buena    100
 Name: count, dtype: int64
 </code></pre></div>
 <h2 id="7-rango-temporal-de-los-datos">7. Rango temporal de los datos<a class="headerlink" href="#7-rango-temporal-de-los-datos" title="Permanent link">&para;</a></h2>
@@ -1198,9 +1196,9 @@ Name: count, dtype: int64
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ultimo registro: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rango: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Primer registro: 2026-06-15 12:15:21.715684-05:00
-Ultimo registro: 2026-06-15 22:00:27.639860-05:00
-Rango: 0 days 09:45:05.924176
+<div class="highlight"><pre><span></span><code>Primer registro: 2026-06-23 06:51:53.869027-05:00
+Ultimo registro: 2026-06-23 08:32:53.117839-05:00
+Rango: 0 days 01:40:59.248812
 </code></pre></div>
 <h2 id="8-visualizacion-rapida-de-temperatura">8. Visualizacion rapida de temperatura<a class="headerlink" href="#8-visualizacion-rapida-de-temperatura" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1233,12 +1231,12 @@ Rango: 0 days 09:45:05.924176
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Obteniendo dato mas reciente cada 5 segundos (Ctrl+C para detener)...
 
-[1] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
-[2] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
-[3] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
-[4] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
-[5] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
-[6] 2026-06-15T22:00:27.63986-05:00 | Temp: 14.30466C | Hum: 34.06216% | IAQ: 5.117658
+[1] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
+[2] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
+[3] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
+[4] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
+[5] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
+[6] 2026-06-23T08:32:53.117839-05:00 | Temp: 9.704172C | Hum: 21.10805% | IAQ: 69.45975
 </code></pre></div>
 
 

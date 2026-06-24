@@ -1050,21 +1050,21 @@ Requirement already satisfied: six&gt;=1.5 in /opt/conda/lib/python3.11/site-pac
 <div class="highlight"><pre><span></span><code>Consumiendo mensajes del topico: iot.air_quality.streaming
 Esperando hasta 30s o 20 mensajes...
 
-[1] Estacion: ESP32_01 | Temp: 14.3 | IAQ: 1.1176579999999996
-[2] Estacion: ESP32_02 | Temp: 13.82 | IAQ: 7.117658
-[3] Estacion: ESP32_03 | Temp: 13.55 | IAQ: 4.117658
-[4] Estacion: ESP32_05 | Temp: 14.39 | IAQ: 10.117657999999999
-[5] Estacion: ESP32_04 | Temp: 14.37 | IAQ: 26.117658
-[6] Estacion: ESP32_01 | Temp: 14.3 | IAQ: 10.117657999999999
-[7] Estacion: ESP32_02 | Temp: 14.61 | IAQ: 1.1176579999999996
-[8] Estacion: ESP32_04 | Temp: 14.55 | IAQ: 24.117658
-[9] Estacion: ESP32_05 | Temp: 14.17 | IAQ: 7.117658
-[10] Estacion: ESP32_03 | Temp: 13.3 | IAQ: 4.117658
-[11] Estacion: ESP32_02 | Temp: 14.27 | IAQ: 4.117658
-[12] Estacion: ESP32_01 | Temp: 14.3 | IAQ: 7.117658
-[13] Estacion: ESP32_05 | Temp: 14.45 | IAQ: 6.117658
-[14] Estacion: ESP32_03 | Temp: 14.63 | IAQ: 10.117657999999999
-[15] Estacion: ESP32_04 | Temp: 14.12 | IAQ: 26.117658
+[1] Estacion: ESP32_02 | Temp: 9.74 | IAQ: 72.46407
+[2] Estacion: ESP32_03 | Temp: 9.38 | IAQ: 66.46407
+[3] Estacion: ESP32_04 | Temp: 9.51 | IAQ: 84.46407
+[4] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 65.46407
+[5] Estacion: ESP32_05 | Temp: 9.68 | IAQ: 64.46407
+[6] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 67.46407
+[7] Estacion: ESP32_05 | Temp: 9.57 | IAQ: 70.46407
+[8] Estacion: ESP32_02 | Temp: 9.46 | IAQ: 73.46407
+[9] Estacion: ESP32_03 | Temp: 10.01 | IAQ: 74.46407
+[10] Estacion: ESP32_04 | Temp: 9.5 | IAQ: 87.46407
+[11] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 64.46407
+[12] Estacion: ESP32_05 | Temp: 9.79 | IAQ: 64.46407
+[13] Estacion: ESP32_02 | Temp: 9.7 | IAQ: 73.46407
+[14] Estacion: ESP32_03 | Temp: 10.64 | IAQ: 73.46407
+[15] Estacion: ESP32_04 | Temp: 9.41 | IAQ: 93.46407
 
 Total mensajes recibidos: 15
 </code></pre></div>
@@ -1086,15 +1086,15 @@ Total mensajes recibidos: 15
 [&#39;estacion&#39;, &#39;temperatura&#39;, &#39;humedad&#39;, &#39;presion&#39;, &#39;altura&#39;, &#39;gas&#39;, &#39;iaq&#39;, &#39;eco2&#39;, &#39;VOC&#39;, &#39;calidad_aire&#39;, &#39;created_at&#39;, &#39;event_timestamp&#39;, &#39;delayed&#39;]
 
 Primer evento completo:
-{&#39;estacion&#39;: &#39;ESP32_01&#39;, &#39;temperatura&#39;: 14.3, &#39;humedad&#39;: 34.06, &#39;presion&#39;: 648.47, &#39;altura&#39;: 3608.958, &#39;gas&#39;: 23601, &#39;iaq&#39;: 1.1176579999999996, &#39;eco2&#39;: 448.0825, &#39;VOC&#39;: 0.421, &#39;calidad_aire&#39;: &#39;BUENA&#39;, &#39;created_at&#39;: &#39;2026-06-16T03:01:22.796479&#39;, &#39;event_timestamp&#39;: 1781578882796, &#39;delayed&#39;: nan}
+{&#39;estacion&#39;: &#39;ESP32_02&#39;, &#39;temperatura&#39;: 9.74, &#39;humedad&#39;: 22.04, &#39;presion&#39;: 646.85, &#39;altura&#39;: 3619.001, &#39;gas&#39;: 28190, &#39;iaq&#39;: 72.46407, &#39;eco2&#39;: 1050.069, &#39;VOC&#39;: 0.473, &#39;calidad_aire&#39;: &#39;MODERADA&#39;, &#39;created_at&#39;: &#39;2026-06-23T13:33:57.259698&#39;, &#39;event_timestamp&#39;: 1782221637259, &#39;delayed&#39;: nan}
 
 Estaciones detectadas:
 estacion
-ESP32_01    3
 ESP32_02    3
 ESP32_03    3
-ESP32_05    3
 ESP32_04    3
+ESP32_01    3
+ESP32_05    3
 Name: count, dtype: int64
 </code></pre></div>
 <h2 id="4-verificacion-de-eventos-retrasados-esp32_05">4. Verificacion de eventos retrasados (ESP32_05)<a class="headerlink" href="#4-verificacion-de-eventos-retrasados-esp32_05" title="Permanent link">&para;</a></h2>
@@ -1110,7 +1110,7 @@ Name: count, dtype: int64
 <div class="highlight"><pre><span></span><code>Eventos retrasados detectados: 3
 
 Ejemplo de evento retrasado:
-  created_at: 2026-06-16T03:01:17.796810
+  created_at: 2026-06-23T13:33:52.259822
   estacion: ESP32_05
   delayed: True
 </code></pre></div>
@@ -1130,9 +1130,9 @@ Ejemplo de evento retrasado:
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latencia minima: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">latencias</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latencia maxima: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">latencias</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Latencia promedio: 18321 ms
-Latencia minima: 7318 ms
-Latencia maxima: 32324 ms
+<div class="highlight"><pre><span></span><code>Latencia promedio: 18413 ms
+Latencia minima: 7409 ms
+Latencia maxima: 32416 ms
 </code></pre></div>
 
 
