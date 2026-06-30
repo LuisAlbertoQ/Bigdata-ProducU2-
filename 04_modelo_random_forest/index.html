@@ -1130,7 +1130,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros cargados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_presion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros cargados: 1042
+<div class="highlight"><pre><span></span><code>Registros cargados: 1573
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq  avg_presion
 0 2026-05-26 14:17:30            11.59        51.48    34.41       649.91
@@ -1174,8 +1174,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros con features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_rf</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
-Registros con features: 62
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 102
+Registros con features: 98
 Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_1&#39;, &#39;temp_lag_2&#39;, &#39;temp_lag_3&#39;, &#39;hum_lag_1&#39;, &#39;hum_lag_2&#39;, &#39;hum_lag_3&#39;, &#39;iaq_lag_1&#39;, &#39;iaq_lag_2&#39;, &#39;iaq_lag_3&#39;, &#39;pres_lag_1&#39;, &#39;pres_lag_2&#39;, &#39;pres_lag_3&#39;, &#39;eco2_lag_1&#39;, &#39;eco2_lag_2&#39;, &#39;eco2_lag_3&#39;, &#39;temp_rolling_3&#39;, &#39;temp_rolling_5&#39;]
 </code></pre></div>
 <h2 id="4-traintest-split">4. Train/Test Split<a class="headerlink" href="#4-traintest-split" title="Permanent link">&para;</a></h2>
@@ -1190,7 +1190,7 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>X_train: (49, 20), X_test: (13, 20)
+<div class="highlight"><pre><span></span><code>X_train: (78, 20), X_test: (20, 20)
 </code></pre></div>
 <h2 id="5-entrenamiento-random-forest">5. Entrenamiento Random Forest<a class="headerlink" href="#5-entrenamiento-random-forest" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span>
@@ -1222,15 +1222,17 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
 <div class="highlight"><pre><span></span><code>========================================
 RESULTADOS RANDOM FOREST
 ========================================
-RMSE: 1.0681
-MAE:  0.5515
-MAPE: 3.87%
-Predicciones: [12.20565691 12.18609003 12.20566186 12.25181039 12.26155696 12.27301977
- 12.2736065  12.2670415  12.25985216 12.26400435 12.26381435 12.26902027
- 12.28987826]
-Reales:       [12.18       12.18       12.3005     12.33285714 12.47666667 12.5252381
- 12.57238095 12.5595     12.54       12.45       12.45       15.44
- 14.37      ]
+RMSE: 0.4034
+MAE:  0.2732
+MAPE: 2.60%
+Predicciones: [10.04594864  9.97958596  9.95310826 10.01960302 10.00944064  9.92304529
+  9.90421168  9.88432159  9.91387811 10.00751667  9.92371946  9.93232592
+  9.92566329  9.92078333  9.92638882  9.89641456  9.91353008  9.90103484
+ 10.31693155 10.11313195]
+Reales:       [10.01       10.03736842 10.05157895 10.072      10.0925     10.07684211
+ 10.06352941 10.08166667 10.10882353 10.15058824 10.19875    10.23588235
+ 10.2525     10.265      10.24294118 10.23941176 10.556      11.31285714
+ 10.24       10.36      ]
 </code></pre></div>
 <h2 id="7-baseline-comparativo-lag-1">7. Baseline comparativo (lag-1)<a class="headerlink" href="#7-baseline-comparativo-lag-1" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Baseline: predecir el ultimo valor conocido (temp_lag_1)</span>
@@ -1252,11 +1254,11 @@ Reales:       [12.18       12.18       12.3005     12.33285714 12.47666667 12.52
 <div class="highlight"><pre><span></span><code>========================================
 BASELINE LAG-1
 ========================================
-RMSE: 0.8829
-MAE:  0.3519
-MAPE: 2.38%
+RMSE: 0.3040
+MAE:  0.1313
+MAPE: 1.24%
 
-Random Forest mejora RMSE en -21.0% vs baseline 
+Random Forest mejora RMSE en -32.7% vs baseline 
 </code></pre></div>
 <h2 id="8-importancia-de-features">8. Importancia de Features<a class="headerlink" href="#8-importancia-de-features" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1275,16 +1277,16 @@ Random Forest mejora RMSE en -21.0% vs baseline
 <span class="n">feat_imp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>           feature  importance
-18  temp_rolling_3    0.675579
-0             hour    0.084380
-12      pres_lag_1    0.070855
-3       temp_lag_1    0.051431
-2        dayofweek    0.036223
-19  temp_rolling_5    0.025731
-4       temp_lag_2    0.010861
-6        hum_lag_1    0.008581
-14      pres_lag_3    0.007556
-5       temp_lag_3    0.005114
+18  temp_rolling_3    0.330000
+3       temp_lag_1    0.147248
+6        hum_lag_1    0.125580
+19  temp_rolling_5    0.120733
+14      pres_lag_3    0.096711
+7        hum_lag_2    0.040567
+4       temp_lag_2    0.036048
+13      pres_lag_2    0.016636
+0             hour    0.015144
+5       temp_lag_3    0.014368
 </code></pre></div>
 <h2 id="9-grafico-prediccion-vs-real">9. Grafico prediccion vs real<a class="headerlink" href="#9-grafico-prediccion-vs-real" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1309,7 +1311,7 @@ Random Forest mejora RMSE en -21.0% vs baseline
 <div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_random_forest.csv
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>          modelo    rmse     mae  mape
-0  Random Forest  1.0681  0.5515  3.87
+0  Random Forest  0.4034  0.2732   2.6
 </code></pre></div>
 
 

@@ -1108,7 +1108,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros cargados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_presion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros cargados: 1042
+<div class="highlight"><pre><span></span><code>Registros cargados: 1573
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq  avg_presion
 0 2026-05-26 14:17:30            11.59        51.48    34.41       649.91
@@ -1155,8 +1155,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros con features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_mlp</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
-Registros con features: 60
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 102
+Registros con features: 96
 Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_1&#39;, &#39;temp_lag_2&#39;, &#39;temp_lag_3&#39;, &#39;hum_lag_1&#39;, &#39;hum_lag_2&#39;, &#39;hum_lag_3&#39;, &#39;iaq_lag_1&#39;, &#39;iaq_lag_2&#39;, &#39;iaq_lag_3&#39;, &#39;pres_lag_1&#39;, &#39;pres_lag_2&#39;, &#39;pres_lag_3&#39;, &#39;eco2_lag_1&#39;, &#39;eco2_lag_2&#39;, &#39;eco2_lag_3&#39;, &#39;temp_rolling_3&#39;, &#39;temp_rolling_5&#39;]
 </code></pre></div>
 <h2 id="4-traintest-split-y-normalizacion">4. Train/Test Split y Normalizacion<a class="headerlink" href="#4-traintest-split-y-normalizacion" title="Permanent link">&para;</a></h2>
@@ -1179,7 +1179,7 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>X_train: (48, 20), X_test: (12, 20)
+<div class="highlight"><pre><span></span><code>X_train: (76, 20), X_test: (20, 20)
 </code></pre></div>
 <h2 id="5-construccion-y-entrenamiento-de-mlp">5. Construccion y Entrenamiento de MLP<a class="headerlink" href="#5-construccion-y-entrenamiento-de-mlp" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -1205,27 +1205,105 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
 <span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Epoch 1/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m2s[0m 492ms/step - loss: 1.4047 - mae: 1.0862 - val_loss: 0.1850 - val_mae: 0.3270
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 526ms/step - loss: 0.2506 - mae: 0.4040 - val_loss: 5.0152 - val_mae: 2.0826
 Epoch 2/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 1.1865 - mae: 0.9790 - val_loss: 0.2079 - val_mae: 0.3182
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 22ms/step - loss: 0.2102 - mae: 0.3723 - val_loss: 4.8791 - val_mae: 2.0379
 Epoch 3/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 24ms/step - loss: 1.0793 - mae: 0.9164 - val_loss: 0.2428 - val_mae: 0.3250
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.1372 - mae: 0.2812 - val_loss: 4.7828 - val_mae: 2.0017
 Epoch 4/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 0.9255 - mae: 0.8518 - val_loss: 0.2870 - val_mae: 0.3824
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 20ms/step - loss: 0.1361 - mae: 0.2935 - val_loss: 4.7013 - val_mae: 1.9687
 Epoch 5/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 25ms/step - loss: 0.8075 - mae: 0.7907 - val_loss: 0.3308 - val_mae: 0.4411
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.0770 - mae: 0.2117 - val_loss: 4.6148 - val_mae: 1.9399
 Epoch 6/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 0.7484 - mae: 0.7536 - val_loss: 0.3805 - val_mae: 0.4989
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.1167 - mae: 0.2581 - val_loss: 4.5386 - val_mae: 1.9180
 Epoch 7/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 0.7254 - mae: 0.7403 - val_loss: 0.4242 - val_mae: 0.5448
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0618 - mae: 0.1998 - val_loss: 4.4572 - val_mae: 1.9012
 Epoch 8/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.5847 - mae: 0.6491 - val_loss: 0.4638 - val_mae: 0.5834
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0542 - mae: 0.1735 - val_loss: 4.3876 - val_mae: 1.8875
 Epoch 9/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 25ms/step - loss: 0.6344 - mae: 0.6864 - val_loss: 0.4818 - val_mae: 0.6001
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0630 - mae: 0.1945 - val_loss: 4.3348 - val_mae: 1.8782
 Epoch 10/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 27ms/step - loss: 0.4820 - mae: 0.5558 - val_loss: 0.5010 - val_mae: 0.6171
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0581 - mae: 0.1897 - val_loss: 4.3002 - val_mae: 1.8750
 Epoch 11/50
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 0.4304 - mae: 0.5471 - val_loss: 0.5208 - val_mae: 0.6337
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.0506 - mae: 0.1662 - val_loss: 4.2698 - val_mae: 1.8739
+Epoch 12/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 24ms/step - loss: 0.0478 - mae: 0.1754 - val_loss: 4.2468 - val_mae: 1.8732
+Epoch 13/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0413 - mae: 0.1635 - val_loss: 4.2374 - val_mae: 1.8744
+Epoch 14/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0565 - mae: 0.1830 - val_loss: 4.2330 - val_mae: 1.8723
+Epoch 15/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0353 - mae: 0.1383 - val_loss: 4.2227 - val_mae: 1.8700
+Epoch 16/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.0390 - mae: 0.1405 - val_loss: 4.2327 - val_mae: 1.8711
+Epoch 17/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0405 - mae: 0.1425 - val_loss: 4.2424 - val_mae: 1.8731
+Epoch 18/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0409 - mae: 0.1503 - val_loss: 4.2520 - val_mae: 1.8744
+Epoch 19/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0409 - mae: 0.1517 - val_loss: 4.2512 - val_mae: 1.8762
+Epoch 20/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 20ms/step - loss: 0.0350 - mae: 0.1372 - val_loss: 4.2349 - val_mae: 1.8793
+Epoch 21/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.0511 - mae: 0.1567 - val_loss: 4.2043 - val_mae: 1.8793
+Epoch 22/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0416 - mae: 0.1380 - val_loss: 4.1768 - val_mae: 1.8779
+Epoch 23/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0238 - mae: 0.1155 - val_loss: 4.1562 - val_mae: 1.8755
+Epoch 24/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0292 - mae: 0.1217 - val_loss: 4.1415 - val_mae: 1.8754
+Epoch 25/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0291 - mae: 0.1267 - val_loss: 4.1188 - val_mae: 1.8724
+Epoch 26/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0238 - mae: 0.1139 - val_loss: 4.1035 - val_mae: 1.8697
+Epoch 27/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 21ms/step - loss: 0.0312 - mae: 0.1408 - val_loss: 4.1021 - val_mae: 1.8685
+Epoch 28/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 20ms/step - loss: 0.0267 - mae: 0.1255 - val_loss: 4.1003 - val_mae: 1.8650
+Epoch 29/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0280 - mae: 0.1188 - val_loss: 4.0889 - val_mae: 1.8617
+Epoch 30/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0218 - mae: 0.1165 - val_loss: 4.0694 - val_mae: 1.8584
+Epoch 31/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0178 - mae: 0.1068 - val_loss: 4.0378 - val_mae: 1.8555
+Epoch 32/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0211 - mae: 0.1067 - val_loss: 4.0151 - val_mae: 1.8517
+Epoch 33/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0182 - mae: 0.1022 - val_loss: 4.0078 - val_mae: 1.8489
+Epoch 34/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0212 - mae: 0.1136 - val_loss: 4.0076 - val_mae: 1.8484
+Epoch 35/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 15ms/step - loss: 0.0246 - mae: 0.1061 - val_loss: 4.0117 - val_mae: 1.8504
+Epoch 36/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0202 - mae: 0.1089 - val_loss: 4.0003 - val_mae: 1.8505
+Epoch 37/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0166 - mae: 0.0989 - val_loss: 3.9881 - val_mae: 1.8529
+Epoch 38/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 20ms/step - loss: 0.0177 - mae: 0.0982 - val_loss: 3.9796 - val_mae: 1.8569
+Epoch 39/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0171 - mae: 0.1002 - val_loss: 3.9890 - val_mae: 1.8621
+Epoch 40/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 19ms/step - loss: 0.0171 - mae: 0.1058 - val_loss: 4.0061 - val_mae: 1.8673
+Epoch 41/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0150 - mae: 0.0927 - val_loss: 4.0053 - val_mae: 1.8684
+Epoch 42/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0206 - mae: 0.1119 - val_loss: 3.9804 - val_mae: 1.8640
+Epoch 43/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0173 - mae: 0.0940 - val_loss: 3.9491 - val_mae: 1.8562
+Epoch 44/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0238 - mae: 0.1110 - val_loss: 3.9194 - val_mae: 1.8479
+Epoch 45/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0220 - mae: 0.1056 - val_loss: 3.8940 - val_mae: 1.8432
+Epoch 46/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0201 - mae: 0.1117 - val_loss: 3.8554 - val_mae: 1.8387
+Epoch 47/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 17ms/step - loss: 0.0189 - mae: 0.1040 - val_loss: 3.8291 - val_mae: 1.8353
+Epoch 48/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0168 - mae: 0.0939 - val_loss: 3.8116 - val_mae: 1.8331
+Epoch 49/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 16ms/step - loss: 0.0133 - mae: 0.0848 - val_loss: 3.8218 - val_mae: 1.8344
+Epoch 50/50
+[1m4/4[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 18ms/step - loss: 0.0154 - mae: 0.0887 - val_loss: 3.8312 - val_mae: 1.8368
 </code></pre></div>
 <h2 id="6-prediccion-y-evaluacion">6. Prediccion y Evaluacion<a class="headerlink" href="#6-prediccion-y-evaluacion" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">preds_scaled</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -1248,13 +1326,16 @@ Epoch 11/50
 <div class="highlight"><pre><span></span><code>========================================
 RESULTADOS MLP
 ========================================
-RMSE: 0.3445
-MAE:  0.3245
-MAPE: 2.61%
-Predicciones: [11.901676 11.961845 12.020671 12.143018 12.132008 12.121905 12.051937
- 12.071064 12.116645 12.128832 12.108196 12.095732]
-Reales:       [12.18       12.18       12.18       12.3005     12.33285714 12.47666667
- 12.5252381  12.57238095 12.5595     12.54       12.45       12.45      ]
+RMSE: 1.7576
+MAE:  1.7070
+MAPE: 16.85%
+Predicciones: [12.088394 12.098608 12.024932 11.916227 11.907991 11.867853 11.866749
+ 11.821857 11.806399 11.793041 12.189708 12.10867  12.084573 11.979113
+ 11.930989 11.907114 11.773666 11.75845  11.72573  11.47128 ]
+Reales:       [ 9.944375    9.98888889 10.01       10.03736842 10.05157895 10.072
+ 10.0925     10.07684211 10.06352941 10.08166667 10.10882353 10.15058824
+ 10.19875    10.23588235 10.2525     10.265      10.24294118 10.23941176
+ 10.556      11.31285714]
 </code></pre></div>
 <h2 id="7-baseline-comparativo-lag-1">7. Baseline comparativo (lag-1)<a class="headerlink" href="#7-baseline-comparativo-lag-1" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Baseline: predecir el ultimo valor conocido (temp_lag_1)</span>
@@ -1276,11 +1357,11 @@ Reales:       [12.18       12.18       12.18       12.3005     12.33285714 12.47
 <div class="highlight"><pre><span></span><code>========================================
 BASELINE LAG-1
 ========================================
-RMSE: 0.0642
-MAE:  0.0430
-MAPE: 0.35%
+RMSE: 0.1852
+MAE:  0.0755
+MAPE: 0.70%
 
-MLP mejora RMSE en -436.5% vs baseline 
+MLP mejora RMSE en -848.9% vs baseline 
 </code></pre></div>
 <h2 id="8-grafico-prediccion-vs-real">8. Grafico prediccion vs real<a class="headerlink" href="#8-grafico-prediccion-vs-real" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1316,8 +1397,8 @@ MLP mejora RMSE en -436.5% vs baseline
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_mlp.csv
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  modelo    rmse     mae  mape
-0    MLP  0.3445  0.3245  2.61
+<div class="highlight"><pre><span></span><code>  modelo    rmse    mae   mape
+0    MLP  1.7576  1.707  16.85
 </code></pre></div>
 
 

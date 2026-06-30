@@ -1124,7 +1124,7 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>TensorFlow version: 2.21.0
 GPU detectada: /physical_device:GPU:0
-Memoria GPU: {&#39;current&#39;: 1258752, &#39;peak&#39;: 10354176}
+Memoria GPU: {&#39;current&#39;: 0, &#39;peak&#39;: 0}
 </code></pre></div>
 <h2 id="3-carga-de-datos-desde-timescaledb">3. Carga de datos desde TimescaleDB<a class="headerlink" href="#3-carga-de-datos-desde-timescaledb" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1143,7 +1143,7 @@ Memoria GPU: {&#39;current&#39;: 1258752, &#39;peak&#39;: 10354176}
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros cargados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros cargados: 1042
+<div class="highlight"><pre><span></span><code>Registros cargados: 1573
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq
 0 2026-05-26 14:17:30            11.59        51.48    34.41
@@ -1182,9 +1182,9 @@ Memoria GPU: {&#39;current&#39;: 1258752, &#39;peak&#39;: 10354176}
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_train: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_test: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
-X_train: (48, 5, 5), X_test: (13, 5, 5)
-y_train: (48,), y_test: (13,)
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 102
+X_train: (77, 5, 5), X_test: (20, 5, 5)
+y_train: (77,), y_test: (20,)
 </code></pre></div>
 <h2 id="5-construccion-del-modelo-lstm">5. Construccion del modelo LSTM<a class="headerlink" href="#5-construccion-del-modelo-lstm" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
@@ -1224,45 +1224,29 @@ y_train: (48,), y_test: (13,)
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Entrenamiento completado en </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> epochs&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Epoch 1/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m1s[0m 122ms/step - loss: 0.0103 - mae: 0.0814 - val_loss: 0.0038 - val_mae: 0.0486
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 72ms/step - loss: 0.1406 - mae: 0.3569 - val_loss: 0.0362 - val_mae: 0.1432
 Epoch 2/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 30ms/step - loss: 0.0064 - mae: 0.0701 - val_loss: 0.0050 - val_mae: 0.0588
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 22ms/step - loss: 0.0342 - mae: 0.1480 - val_loss: 0.0504 - val_mae: 0.2155
 Epoch 3/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 27ms/step - loss: 0.0063 - mae: 0.0641 - val_loss: 0.0087 - val_mae: 0.0845
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 25ms/step - loss: 0.0221 - mae: 0.1082 - val_loss: 0.0730 - val_mae: 0.2570
 Epoch 4/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.0051 - mae: 0.0602 - val_loss: 0.0108 - val_mae: 0.0963
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 32ms/step - loss: 0.0301 - mae: 0.1485 - val_loss: 0.0610 - val_mae: 0.2392
 Epoch 5/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 29ms/step - loss: 0.0042 - mae: 0.0571 - val_loss: 0.0107 - val_mae: 0.0955
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 23ms/step - loss: 0.0146 - mae: 0.0923 - val_loss: 0.0463 - val_mae: 0.2060
 Epoch 6/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 31ms/step - loss: 0.0036 - mae: 0.0501 - val_loss: 0.0078 - val_mae: 0.0789
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 24ms/step - loss: 0.0145 - mae: 0.0814 - val_loss: 0.0429 - val_mae: 0.1944
 Epoch 7/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 34ms/step - loss: 0.0027 - mae: 0.0389 - val_loss: 0.0050 - val_mae: 0.0591
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 32ms/step - loss: 0.0162 - mae: 0.0901 - val_loss: 0.0461 - val_mae: 0.2057
 Epoch 8/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 34ms/step - loss: 0.0040 - mae: 0.0429 - val_loss: 0.0034 - val_mae: 0.0468
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 35ms/step - loss: 0.0123 - mae: 0.0725 - val_loss: 0.0539 - val_mae: 0.2263
 Epoch 9/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 31ms/step - loss: 0.0043 - mae: 0.0497 - val_loss: 0.0030 - val_mae: 0.0428
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 27ms/step - loss: 0.0085 - mae: 0.0661 - val_loss: 0.0602 - val_mae: 0.2391
 Epoch 10/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 29ms/step - loss: 0.0029 - mae: 0.0391 - val_loss: 0.0040 - val_mae: 0.0511
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 26ms/step - loss: 0.0138 - mae: 0.0887 - val_loss: 0.0562 - val_mae: 0.2303
 Epoch 11/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.0025 - mae: 0.0335 - val_loss: 0.0046 - val_mae: 0.0556
-Epoch 12/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 29ms/step - loss: 0.0024 - mae: 0.0335 - val_loss: 0.0045 - val_mae: 0.0548
-Epoch 13/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 29ms/step - loss: 0.0025 - mae: 0.0346 - val_loss: 0.0043 - val_mae: 0.0534
-Epoch 14/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.0025 - mae: 0.0345 - val_loss: 0.0050 - val_mae: 0.0582
-Epoch 15/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.0021 - mae: 0.0333 - val_loss: 0.0061 - val_mae: 0.0669
-Epoch 16/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 35ms/step - loss: 0.0026 - mae: 0.0327 - val_loss: 0.0067 - val_mae: 0.0708
-Epoch 17/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 27ms/step - loss: 0.0024 - mae: 0.0329 - val_loss: 0.0071 - val_mae: 0.0728
-Epoch 18/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 28ms/step - loss: 0.0030 - mae: 0.0348 - val_loss: 0.0071 - val_mae: 0.0733
-Epoch 19/100
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 29ms/step - loss: 0.0026 - mae: 0.0333 - val_loss: 0.0068 - val_mae: 0.0711
+[1m5/5[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 22ms/step - loss: 0.0108 - mae: 0.0734 - val_loss: 0.0503 - val_mae: 0.2161
 
-Entrenamiento completado en 19 epochs
+Entrenamiento completado en 11 epochs
 </code></pre></div>
 <h2 id="7-grafico-de-perdida">7. Grafico de perdida<a class="headerlink" href="#7-grafico-de-perdida" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -1302,19 +1286,21 @@ Entrenamiento completado en 19 epochs
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicciones: </span><span class="si">{</span><span class="n">preds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reales:       </span><span class="si">{</span><span class="n">true</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 97ms/step
+<div class="highlight"><pre><span></span><code>[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 112ms/step
 ========================================
 RESULTADOS LSTM
 ========================================
-RMSE: 1.2668
-MAE:  0.8874
-MAPE: 6.52%
-Predicciones: [11.8303618  11.82490521 11.81854582 11.83296077 11.86234307 11.89844151
- 11.94176307 11.98446961 11.97784037 11.97145888 11.96389969 11.9603493
- 11.97343499]
-Reales:       [12.18       12.18       12.3005     12.33285714 12.47666667 12.5252381
- 12.57238095 12.5595     12.54       12.45       12.45       15.44
- 14.37      ]
+RMSE: 0.2700
+MAE:  0.1412
+MAPE: 1.33%
+Predicciones: [10.19135365 10.18604426 10.18293603 10.17743505 10.17569468 10.1771619
+ 10.17906806 10.18449787 10.19563821 10.20564137 10.21285483 10.21252084
+ 10.20936767 10.20576055 10.20490579 10.20656185 10.20730951 10.22163557
+ 10.29008675 10.34754488]
+Reales:       [10.01       10.03736842 10.05157895 10.072      10.0925     10.07684211
+ 10.06352941 10.08166667 10.10882353 10.15058824 10.19875    10.23588235
+ 10.2525     10.265      10.24294118 10.23941176 10.556      11.31285714
+ 10.24       10.36      ]
 </code></pre></div>
 <h2 id="9-grafico-prediccion-vs-real">9. Grafico prediccion vs real<a class="headerlink" href="#9-grafico-prediccion-vs-real" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">test_ds</span> <span class="o">=</span> <span class="n">df_lstm</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="o">+</span><span class="n">SEQ_LEN</span><span class="p">):][</span><span class="n">SEQ_LEN</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>
@@ -1341,8 +1327,8 @@ Reales:       [12.18       12.18       12.3005     12.33285714 12.47666667 12.52
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_lstm.csv
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>  modelo    rmse     mae  mape
-0   LSTM  1.2668  0.8874  6.52
+<div class="highlight"><pre><span></span><code>  modelo  rmse     mae  mape
+0   LSTM  0.27  0.1412  1.33
 </code></pre></div>
 
 

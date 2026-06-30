@@ -1130,7 +1130,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros cargados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;window_start&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_iaq&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_presion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros cargados: 1042
+<div class="highlight"><pre><span></span><code>Registros cargados: 1573
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>         window_start  avg_temperatura  avg_humedad  avg_iaq  avg_presion
 0 2026-05-26 14:17:30            11.59        51.48    34.41       649.91
@@ -1177,8 +1177,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros con features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_xgb</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
-Registros con features: 60
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 102
+Registros con features: 96
 Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_1&#39;, &#39;temp_lag_2&#39;, &#39;temp_lag_3&#39;, &#39;hum_lag_1&#39;, &#39;hum_lag_2&#39;, &#39;hum_lag_3&#39;, &#39;iaq_lag_1&#39;, &#39;iaq_lag_2&#39;, &#39;iaq_lag_3&#39;, &#39;pres_lag_1&#39;, &#39;pres_lag_2&#39;, &#39;pres_lag_3&#39;, &#39;eco2_lag_1&#39;, &#39;eco2_lag_2&#39;, &#39;eco2_lag_3&#39;, &#39;temp_rolling_3&#39;, &#39;temp_rolling_5&#39;]
 </code></pre></div>
 <h2 id="4-traintest-split">4. Train/Test Split<a class="headerlink" href="#4-traintest-split" title="Permanent link">&para;</a></h2>
@@ -1193,7 +1193,7 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>X_train: (48, 20), X_test: (12, 20)
+<div class="highlight"><pre><span></span><code>X_train: (76, 20), X_test: (20, 20)
 </code></pre></div>
 <h2 id="5-entrenamiento-xgboost-con-gpu-si-esta-disponible">5. Entrenamiento XGBoost (con GPU si esta disponible)<a class="headerlink" href="#5-entrenamiento-xgboost-con-gpu-si-esta-disponible" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xgb</span>
@@ -1217,9 +1217,15 @@ Features: [&#39;hour&#39;, &#39;minute&#39;, &#39;dayofweek&#39;, &#39;temp_lag_
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;XGBoost entrenado con CPU (GPU no disponible)&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entrenamiento completado&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;/home/jovyan/work/models&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s1">&#39;/home/jovyan/work/models/xgb_model.json&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Modelo guardado en /home/jovyan/work/models/xgb_model.json&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>XGBoost entrenado con GPU
 Entrenamiento completado
+Modelo guardado en /home/jovyan/models/xgb_model.json
 </code></pre></div>
 <h2 id="6-prediccion-y-evaluacion">6. Prediccion y Evaluacion<a class="headerlink" href="#6-prediccion-y-evaluacion" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -1241,13 +1247,17 @@ Entrenamiento completado
 <div class="highlight"><pre><span></span><code>========================================
 RESULTADOS XGBOOST
 ========================================
-RMSE: 0.2055
-MAE:  0.1698
-MAPE: 1.36%
-Predicciones: [12.174997 12.174997 12.174997 12.180042 12.242022 12.242053 12.254552
- 12.254552 12.254575 12.24953  12.254575 12.252484]
-Reales:       [12.18       12.18       12.18       12.3005     12.33285714 12.47666667
- 12.5252381  12.57238095 12.5595     12.54       12.45       12.45      ]
+RMSE: 0.3009
+MAE:  0.2140
+MAPE: 2.06%
+Predicciones: [10.05814    9.739788   9.962473   9.815923   9.822599   9.9693365
+  9.970379   9.758935   9.758935   9.848964  10.20471    9.912075
+ 10.156041  10.156041  10.156041  10.156876  10.15753   10.112382
+ 10.112382  10.291358 ]
+Reales:       [ 9.944375    9.98888889 10.01       10.03736842 10.05157895 10.072
+ 10.0925     10.07684211 10.06352941 10.08166667 10.10882353 10.15058824
+ 10.19875    10.23588235 10.2525     10.265      10.24294118 10.23941176
+ 10.556      11.31285714]
 </code></pre></div>
 <h2 id="7-baseline-comparativo-lag-1">7. Baseline comparativo (lag-1)<a class="headerlink" href="#7-baseline-comparativo-lag-1" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Baseline: predecir el ultimo valor conocido (temp_lag_1)</span>
@@ -1269,11 +1279,11 @@ Reales:       [12.18       12.18       12.18       12.3005     12.33285714 12.47
 <div class="highlight"><pre><span></span><code>========================================
 BASELINE LAG-1
 ========================================
-RMSE: 0.0642
-MAE:  0.0430
-MAPE: 0.35%
+RMSE: 0.1852
+MAE:  0.0755
+MAPE: 0.70%
 
-XGBoost mejora RMSE en -220.0% vs baseline
+XGBoost mejora RMSE en -62.5% vs baseline
 </code></pre></div>
 <h2 id="8-importancia-de-features">8. Importancia de Features<a class="headerlink" href="#8-importancia-de-features" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">feat_imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1292,16 +1302,16 @@ XGBoost mejora RMSE en -220.0% vs baseline
 <span class="n">feat_imp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>           feature  importance
-18  temp_rolling_3    0.864244
-0             hour    0.095047
-6        hum_lag_1    0.008568
-5       temp_lag_3    0.006963
-4       temp_lag_2    0.006047
-10       iaq_lag_2    0.005301
-19  temp_rolling_5    0.005280
-11       iaq_lag_3    0.001698
-9        iaq_lag_1    0.001594
-14      pres_lag_3    0.001536
+3       temp_lag_1    0.638187
+18  temp_rolling_3    0.237105
+0             hour    0.049557
+14      pres_lag_3    0.036790
+12      pres_lag_1    0.024640
+8        hum_lag_3    0.003004
+10       iaq_lag_2    0.002913
+13      pres_lag_2    0.002128
+2        dayofweek    0.001255
+4       temp_lag_2    0.001185
 </code></pre></div>
 <h2 id="8-grafico-prediccion-vs-real">8. Grafico prediccion vs real<a class="headerlink" href="#8-grafico-prediccion-vs-real" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1325,8 +1335,8 @@ XGBoost mejora RMSE en -220.0% vs baseline
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Metricas guardadas en metrics_xgboost.csv
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>    modelo    rmse     mae  mape
-0  XGBoost  0.2055  0.1698  1.36
+<div class="highlight"><pre><span></span><code>    modelo    rmse    mae  mape
+0  XGBoost  0.3009  0.214  2.06
 </code></pre></div>
 
 

@@ -1002,14 +1002,19 @@
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="err">!</span><span class="p">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">}</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">kafka</span><span class="o">-</span><span class="n">python</span><span class="o">-</span><span class="n">ng</span> <span class="n">pandas</span> <span class="n">python</span><span class="o">-</span><span class="n">dotenv</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Requirement already satisfied: kafka-python-ng in /opt/conda/lib/python3.11/site-packages (2.2.3)
+<div class="highlight"><pre><span></span><code>Collecting kafka-python-ng
+  Downloading kafka_python_ng-2.2.3-py2.py3-none-any.whl.metadata (9.7 kB)
 Requirement already satisfied: pandas in /opt/conda/lib/python3.11/site-packages (2.0.3)
 Requirement already satisfied: python-dotenv in /opt/conda/lib/python3.11/site-packages (1.2.2)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/conda/lib/python3.11/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/conda/lib/python3.11/site-packages (from pandas) (2.8.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /opt/conda/lib/python3.11/site-packages (from pandas) (2023.3.post1)
 Requirement already satisfied: tzdata&gt;=2022.1 in /opt/conda/lib/python3.11/site-packages (from pandas) (2023.3)
-Requirement already satisfied: numpy&gt;=1.21.0 in /opt/conda/lib/python3.11/site-packages (from pandas) (1.26.4)
+Requirement already satisfied: numpy&gt;=1.21.0 in /opt/conda/lib/python3.11/site-packages (from pandas) (1.24.4)
 Requirement already satisfied: six&gt;=1.5 in /opt/conda/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
+Downloading kafka_python_ng-2.2.3-py2.py3-none-any.whl (232 kB)
+[2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m232.8/232.8 kB[0m [31m4.9 MB/s[0m eta [36m0:00:00[0ma [36m0:00:01[0m
+[?25hInstalling collected packages: kafka-python-ng
+Successfully installed kafka-python-ng-2.2.3
 </code></pre></div>
 <h2 id="2-consumo-de-mensajes-de-kafka">2. Consumo de mensajes de Kafka<a class="headerlink" href="#2-consumo-de-mensajes-de-kafka" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaConsumer</span>
@@ -1050,23 +1055,28 @@ Requirement already satisfied: six&gt;=1.5 in /opt/conda/lib/python3.11/site-pac
 <div class="highlight"><pre><span></span><code>Consumiendo mensajes del topico: iot.air_quality.streaming
 Esperando hasta 30s o 20 mensajes...
 
-[1] Estacion: ESP32_02 | Temp: 9.74 | IAQ: 72.46407
-[2] Estacion: ESP32_03 | Temp: 9.38 | IAQ: 66.46407
-[3] Estacion: ESP32_04 | Temp: 9.51 | IAQ: 84.46407
-[4] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 65.46407
-[5] Estacion: ESP32_05 | Temp: 9.68 | IAQ: 64.46407
-[6] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 67.46407
-[7] Estacion: ESP32_05 | Temp: 9.57 | IAQ: 70.46407
-[8] Estacion: ESP32_02 | Temp: 9.46 | IAQ: 73.46407
-[9] Estacion: ESP32_03 | Temp: 10.01 | IAQ: 74.46407
-[10] Estacion: ESP32_04 | Temp: 9.5 | IAQ: 87.46407
-[11] Estacion: ESP32_01 | Temp: 9.69 | IAQ: 64.46407
-[12] Estacion: ESP32_05 | Temp: 9.79 | IAQ: 64.46407
-[13] Estacion: ESP32_02 | Temp: 9.7 | IAQ: 73.46407
-[14] Estacion: ESP32_03 | Temp: 10.64 | IAQ: 73.46407
-[15] Estacion: ESP32_04 | Temp: 9.41 | IAQ: 93.46407
+[1] Estacion: ESP32_01 | Temp: 10.23 | IAQ: 0
+[2] Estacion: ESP32_05 | Temp: 10.21 | IAQ: 0
+[3] Estacion: ESP32_02 | Temp: 10.49 | IAQ: 0
+[4] Estacion: ESP32_04 | Temp: 10.03 | IAQ: 15
+[5] Estacion: ESP32_03 | Temp: 9.6 | IAQ: 0
+[6] Estacion: ESP32_02 | Temp: 10.45 | IAQ: 0
+[7] Estacion: ESP32_03 | Temp: 10.62 | IAQ: 1
+[8] Estacion: ESP32_04 | Temp: 10.21 | IAQ: 23
+[9] Estacion: ESP32_01 | Temp: 10.23 | IAQ: 0
+[10] Estacion: ESP32_05 | Temp: 10.27 | IAQ: 0
+[11] Estacion: ESP32_03 | Temp: 10.36 | IAQ: 3
+[12] Estacion: ESP32_04 | Temp: 10.29 | IAQ: 20
+[13] Estacion: ESP32_01 | Temp: 10.23 | IAQ: 0
+[14] Estacion: ESP32_02 | Temp: 10.15 | IAQ: 0
+[15] Estacion: ESP32_05 | Temp: 10.29 | IAQ: 3
+[16] Estacion: ESP32_01 | Temp: 10.23 | IAQ: 0
+[17] Estacion: ESP32_04 | Temp: 10.23 | IAQ: 23
+[18] Estacion: ESP32_02 | Temp: 10.03 | IAQ: 3
+[19] Estacion: ESP32_03 | Temp: 11.41 | IAQ: 0
+[20] Estacion: ESP32_05 | Temp: 10.05 | IAQ: 0
 
-Total mensajes recibidos: 15
+Total mensajes recibidos: 20
 </code></pre></div>
 <h2 id="3-analisis-de-mensajes-recibidos">3. Analisis de mensajes recibidos<a class="headerlink" href="#3-analisis-de-mensajes-recibidos" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1086,15 +1096,15 @@ Total mensajes recibidos: 15
 [&#39;estacion&#39;, &#39;temperatura&#39;, &#39;humedad&#39;, &#39;presion&#39;, &#39;altura&#39;, &#39;gas&#39;, &#39;iaq&#39;, &#39;eco2&#39;, &#39;VOC&#39;, &#39;calidad_aire&#39;, &#39;created_at&#39;, &#39;event_timestamp&#39;, &#39;delayed&#39;]
 
 Primer evento completo:
-{&#39;estacion&#39;: &#39;ESP32_02&#39;, &#39;temperatura&#39;: 9.74, &#39;humedad&#39;: 22.04, &#39;presion&#39;: 646.85, &#39;altura&#39;: 3619.001, &#39;gas&#39;: 28190, &#39;iaq&#39;: 72.46407, &#39;eco2&#39;: 1050.069, &#39;VOC&#39;: 0.473, &#39;calidad_aire&#39;: &#39;MODERADA&#39;, &#39;created_at&#39;: &#39;2026-06-23T13:33:57.259698&#39;, &#39;event_timestamp&#39;: 1782221637259, &#39;delayed&#39;: nan}
+{&#39;estacion&#39;: &#39;ESP32_01&#39;, &#39;temperatura&#39;: 10.23, &#39;humedad&#39;: 36.36, &#39;presion&#39;: 646.23, &#39;altura&#39;: 3622.35, &#39;gas&#39;: 28445, &#39;iaq&#39;: 0, &#39;eco2&#39;: 408, &#39;VOC&#39;: 0.528, &#39;calidad_aire&#39;: &#39;BUENA&#39;, &#39;created_at&#39;: &#39;2026-06-28T02:12:54.656053&#39;, &#39;event_timestamp&#39;: 1782612774656, &#39;delayed&#39;: nan}
 
 Estaciones detectadas:
 estacion
-ESP32_02    3
-ESP32_03    3
-ESP32_04    3
-ESP32_01    3
-ESP32_05    3
+ESP32_01    4
+ESP32_05    4
+ESP32_02    4
+ESP32_04    4
+ESP32_03    4
 Name: count, dtype: int64
 </code></pre></div>
 <h2 id="4-verificacion-de-eventos-retrasados-esp32_05">4. Verificacion de eventos retrasados (ESP32_05)<a class="headerlink" href="#4-verificacion-de-eventos-retrasados-esp32_05" title="Permanent link">&para;</a></h2>
@@ -1107,10 +1117,10 @@ Name: count, dtype: int64
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  estacion: </span><span class="si">{</span><span class="n">delayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;estacion&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  delayed: </span><span class="si">{</span><span class="n">delayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;delayed&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Eventos retrasados detectados: 3
+<div class="highlight"><pre><span></span><code>Eventos retrasados detectados: 4
 
 Ejemplo de evento retrasado:
-  created_at: 2026-06-23T13:33:52.259822
+  created_at: 2026-06-28T02:12:49.656452
   estacion: ESP32_05
   delayed: True
 </code></pre></div>
@@ -1130,9 +1140,9 @@ Ejemplo de evento retrasado:
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latencia minima: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">latencias</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latencia maxima: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">latencias</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Latencia promedio: 18413 ms
-Latencia minima: 7409 ms
-Latencia maxima: 32416 ms
+<div class="highlight"><pre><span></span><code>Latencia promedio: 16312 ms
+Latencia minima: 308 ms
+Latencia maxima: 35317 ms
 </code></pre></div>
 
 

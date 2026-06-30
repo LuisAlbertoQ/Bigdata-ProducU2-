@@ -989,22 +989,22 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">No se encontraron metricas. Ejecuta los notebooks 04-07 primero.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 66
-Baseline lag-1: RMSE=0.8829, MAE=0.3519, MAPE=2.38%
-Random Forest: {&#39;modelo&#39;: &#39;Random Forest&#39;, &#39;rmse&#39;: 1.0681, &#39;mae&#39;: 0.5515, &#39;mape&#39;: 3.87}
-MLP: {&#39;modelo&#39;: &#39;MLP&#39;, &#39;rmse&#39;: 0.3445, &#39;mae&#39;: 0.3245, &#39;mape&#39;: 2.61}
-XGBoost: {&#39;modelo&#39;: &#39;XGBoost&#39;, &#39;rmse&#39;: 0.2055, &#39;mae&#39;: 0.1698, &#39;mape&#39;: 1.36}
-LSTM: {&#39;modelo&#39;: &#39;LSTM&#39;, &#39;rmse&#39;: 1.2668, &#39;mae&#39;: 0.8874, &#39;mape&#39;: 6.52}
+<div class="highlight"><pre><span></span><code>Registros tras agregacion 5min: 102
+Baseline lag-1: RMSE=0.2969, MAE=0.1272, MAPE=1.21%
+Random Forest: {&#39;modelo&#39;: &#39;Random Forest&#39;, &#39;rmse&#39;: 0.4034, &#39;mae&#39;: 0.2732, &#39;mape&#39;: 2.6}
+MLP: {&#39;modelo&#39;: &#39;MLP&#39;, &#39;rmse&#39;: 1.7576, &#39;mae&#39;: 1.707, &#39;mape&#39;: 16.85}
+XGBoost: {&#39;modelo&#39;: &#39;XGBoost&#39;, &#39;rmse&#39;: 0.3009, &#39;mae&#39;: 0.214, &#39;mape&#39;: 2.06}
+LSTM: {&#39;modelo&#39;: &#39;LSTM&#39;, &#39;rmse&#39;: 0.27, &#39;mae&#39;: 0.1412, &#39;mape&#39;: 1.33}
 
 ==================================================
 TABLA COMPARATIVA
 ==================================================
           modelo   rmse    mae  mape
-Baseline (lag-1) 0.8829 0.3519  2.38
-   Random Forest 1.0681 0.5515  3.87
-             MLP 0.3445 0.3245  2.61
-         XGBoost 0.2055 0.1698  1.36
-            LSTM 1.2668 0.8874  6.52
+Baseline (lag-1) 0.2969 0.1272  1.21
+   Random Forest 0.4034 0.2732  2.60
+             MLP 1.7576 1.7070 16.85
+         XGBoost 0.3009 0.2140  2.06
+            LSTM 0.2700 0.1412  1.33
 </code></pre></div>
 <h2 id="2-grafico-de-barras-comparativo">2. Grafico de barras comparativo<a class="headerlink" href="#2-grafico-de-barras-comparativo" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -1031,8 +1031,8 @@ Baseline (lag-1) 0.8829 0.3519  2.38
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mejor modelo (RMSE): </span><span class="si">{</span><span class="n">mejor_rmse</span><span class="p">[</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con </span><span class="si">{</span><span class="n">mejor_rmse</span><span class="p">[</span><span class="s1">&#39;rmse&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mejor modelo (MAPE): </span><span class="si">{</span><span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comparacion</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()][</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con </span><span class="si">{</span><span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comparacion</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()][</span><span class="s1">&#39;mape&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Mejor modelo (RMSE): XGBoost con 0.2055
-Mejor modelo (MAPE): XGBoost con 1.36%
+<div class="highlight"><pre><span></span><code>Mejor modelo (RMSE): LSTM con 0.2700
+Mejor modelo (MAPE): Baseline (lag-1) con 1.21%
 </code></pre></div>
 
 

@@ -1152,7 +1152,7 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Spark Session creada - Version: 3.5.0
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>&lt;pyspark.sql.session.SparkSession at 0x718cb15c4650&gt;
+<div class="highlight"><pre><span></span><code>&lt;pyspark.sql.session.SparkSession at 0x76948410a8d0&gt;
 </code></pre></div>
 <h2 id="2-definicion-del-schema-del-evento">2. Definicion del Schema del evento<a class="headerlink" href="#2-definicion-del-schema-del-evento" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">iot_schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
@@ -1321,20 +1321,20 @@ Estado: True
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total registros en TimescaleDB: </span><span class="si">{</span><span class="n">df_tsdb</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">df_tsdb</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;window_start&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Total registros en TimescaleDB: 6417
+<div class="highlight"><pre><span></span><code>Total registros en TimescaleDB: 8923
 +-------------------+-------------------+--------+---------------+-----------+-------+-----------+--------+-------+------------+-----------+
 |window_start       |window_end         |estacion|avg_temperatura|avg_humedad|avg_iaq|avg_presion|avg_eco2|avg_voc|evento_count|latencia_ms|
 +-------------------+-------------------+--------+---------------+-----------+-------+-----------+--------+-------+------------+-----------+
-|2026-06-23 14:12:30|2026-06-23 14:13:30|ESP32_01|9.96           |19.62      |79.9   |648.07     |1109.46 |0.455  |4           |-793.0     |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_02|10.18          |19.98      |72.51  |647.79     |1087.05 |0.42   |3           |-304.0     |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_04|10.02          |20.3       |90.84  |647.37     |1073.72 |0.519  |3           |-304.33    |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_05|10.08          |20.27      |74.27  |647.25     |1091.49 |0.453  |6           |4368.83    |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_05|10.07          |20.09      |73.01  |647.35     |1074.55 |0.384  |2           |4694.0     |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_01|9.93           |20.5       |70.84  |647.72     |1054.05 |0.445  |3           |-303.67    |
-|2026-06-23 14:12:00|2026-06-23 14:13:00|ESP32_03|9.73           |19.13      |73.84  |647.79     |1064.72 |0.51   |3           |-304.0     |
-|2026-06-23 14:11:30|2026-06-23 14:12:30|ESP32_04|9.98           |20.37      |91.17  |646.73     |1069.72 |0.483  |6           |-299.33    |
-|2026-06-23 14:11:30|2026-06-23 14:12:30|ESP32_02|10.11          |20.67      |72.01  |647.68     |1068.55 |0.45   |6           |-299.0     |
-|2026-06-23 14:11:30|2026-06-23 14:12:30|ESP32_01|9.93           |20.5       |72.84  |647.41     |1068.55 |0.448  |6           |-298.83    |
+|2026-06-30 14:33:00|2026-06-30 14:34:00|ESP32_04|10.84          |31.81      |38.22  |647.85     |541.78  |0.495  |3           |-804.67    |
+|2026-06-30 14:33:00|2026-06-30 14:34:00|ESP32_03|10.72          |32.03      |14.56  |648.04     |537.45  |0.532  |3           |-804.67    |
+|2026-06-30 14:33:00|2026-06-30 14:34:00|ESP32_02|10.98          |32.42      |14.56  |648.12     |532.78  |0.49   |3           |-804.67    |
+|2026-06-30 14:33:00|2026-06-30 14:34:00|ESP32_01|10.71          |31.89      |14.56  |648.2      |536.78  |0.453  |3           |-804.33    |
+|2026-06-30 14:33:00|2026-06-30 14:34:00|ESP32_05|10.78          |32.44      |14.56  |648.37     |534.78  |0.448  |3           |4195.33    |
+|2026-06-30 14:32:30|2026-06-30 14:33:30|ESP32_02|10.9           |31.9       |16.99  |648.21     |561.14  |0.474  |6           |-478.83    |
+|2026-06-30 14:32:30|2026-06-30 14:33:30|ESP32_03|10.75          |31.22      |14.99  |648.2      |555.81  |0.497  |6           |-478.83    |
+|2026-06-30 14:32:30|2026-06-30 14:33:30|ESP32_05|10.75          |31.46      |16.49  |648.48     |549.14  |0.442  |6           |4521.0     |
+|2026-06-30 14:32:30|2026-06-30 14:33:30|ESP32_01|10.71          |31.57      |16.15  |648.24     |554.14  |0.448  |6           |-478.67    |
+|2026-06-30 14:32:30|2026-06-30 14:33:30|ESP32_04|10.74          |31.21      |38.99  |648.33     |561.97  |0.471  |6           |-479.0     |
 +-------------------+-------------------+--------+---------------+-----------+-------+-----------+--------+-------+------------+-----------+
 only showing top 10 rows
 </code></pre></div>
@@ -1345,255 +1345,22 @@ only showing top 10 rows
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Estado de las queries activas:
   - ID: 4be99b01-dac0-4208-889f-b6918a82b480 | Activa: True | Nombre: None
-  - ID: e03adfec-5763-492b-a6bd-0c56ccce5ea9 | Activa: True | Nombre: None
+  - ID: 6ca492de-3d6f-4a16-b6b2-62ee78d051aa | Activa: True | Nombre: None
+  - ID: f1dc3f2b-250f-4d59-80ed-73b9f294da8b | Activa: True | Nombre: None
 
---- Procesando batch 320 con 15 registros ---
-Batch 320 escrito en TimescaleDB
+--- Procesando batch 423 con 25 registros ---
+Batch 423 escrito en TimescaleDB
 
---- Procesando batch 321 con 130 registros ---
-Batch 321 escrito en TimescaleDB
+--- Procesando batch 424 con 40 registros ---
+Batch 424 escrito en TimescaleDB
 
---- Procesando batch 322 con 15 registros ---
-Batch 322 escrito en TimescaleDB
+--- Procesando batch 425 con 25 registros ---
+Batch 425 escrito en TimescaleDB
 
---- Procesando batch 323 con 15 registros ---
-Batch 323 escrito en TimescaleDB
+--- Procesando batch 426 con 25 registros ---
+Batch 426 escrito en TimescaleDB
 
---- Procesando batch 324 con 15 registros ---
-Batch 324 escrito en TimescaleDB
-
---- Procesando batch 325 con 15 registros ---
-Batch 325 escrito en TimescaleDB
-
---- Procesando batch 326 con 15 registros ---
-Batch 326 escrito en TimescaleDB
-
---- Procesando batch 327 con 15 registros ---
-Batch 327 escrito en TimescaleDB
-
---- Procesando batch 328 con 15 registros ---
-Batch 328 escrito en TimescaleDB
-
---- Procesando batch 329 con 20 registros ---
-Batch 329 escrito en TimescaleDB
-
---- Procesando batch 330 con 20 registros ---
-Batch 330 escrito en TimescaleDB
-
---- Procesando batch 331 con 20 registros ---
-Batch 331 escrito en TimescaleDB
-
---- Procesando batch 332 con 20 registros ---
-Batch 332 escrito en TimescaleDB
-
---- Procesando batch 333 con 20 registros ---
-Batch 333 escrito en TimescaleDB
-
---- Procesando batch 334 con 20 registros ---
-Batch 334 escrito en TimescaleDB
-
---- Procesando batch 335 con 20 registros ---
-Batch 335 escrito en TimescaleDB
-
---- Procesando batch 336 con 20 registros ---
-Batch 336 escrito en TimescaleDB
-
---- Procesando batch 337 con 20 registros ---
-Batch 337 escrito en TimescaleDB
-
---- Procesando batch 338 con 20 registros ---
-Batch 338 escrito en TimescaleDB
-
---- Procesando batch 339 con 15 registros ---
-Batch 339 escrito en TimescaleDB
-
---- Procesando batch 340 con 15 registros ---
-Batch 340 escrito en TimescaleDB
-
---- Procesando batch 341 con 20 registros ---
-Batch 341 escrito en TimescaleDB
-
---- Procesando batch 342 con 20 registros ---
-Batch 342 escrito en TimescaleDB
-
---- Procesando batch 343 con 20 registros ---
-Batch 343 escrito en TimescaleDB
-
---- Procesando batch 344 con 20 registros ---
-Batch 344 escrito en TimescaleDB
-
---- Procesando batch 345 con 20 registros ---
-Batch 345 escrito en TimescaleDB
-
---- Procesando batch 346 con 20 registros ---
-Batch 346 escrito en TimescaleDB
-
---- Procesando batch 347 con 20 registros ---
-Batch 347 escrito en TimescaleDB
-
---- Procesando batch 348 con 20 registros ---
-Batch 348 escrito en TimescaleDB
-
---- Procesando batch 349 con 20 registros ---
-Batch 349 escrito en TimescaleDB
-
---- Procesando batch 350 con 15 registros ---
-Batch 350 escrito en TimescaleDB
-
---- Procesando batch 351 con 15 registros ---
-Batch 351 escrito en TimescaleDB
-
---- Procesando batch 352 con 20 registros ---
-Batch 352 escrito en TimescaleDB
-
---- Procesando batch 353 con 19 registros ---
-Batch 353 escrito en TimescaleDB
-
---- Procesando batch 354 con 19 registros ---
-Batch 354 escrito en TimescaleDB
-
---- Procesando batch 355 con 15 registros ---
-Batch 355 escrito en TimescaleDB
-
---- Procesando batch 356 con 20 registros ---
-Batch 356 escrito en TimescaleDB
-
---- Procesando batch 357 con 20 registros ---
-Batch 357 escrito en TimescaleDB
-
---- Procesando batch 358 con 20 registros ---
-Batch 358 escrito en TimescaleDB
-
---- Procesando batch 359 con 20 registros ---
-Batch 359 escrito en TimescaleDB
-
---- Procesando batch 360 con 20 registros ---
-Batch 360 escrito en TimescaleDB
-
---- Procesando batch 361 con 20 registros ---
-Batch 361 escrito en TimescaleDB
-
---- Procesando batch 362 con 20 registros ---
-Batch 362 escrito en TimescaleDB
-
---- Procesando batch 363 con 16 registros ---
-Batch 363 escrito en TimescaleDB
-
---- Procesando batch 364 con 16 registros ---
-Batch 364 escrito en TimescaleDB
-
---- Procesando batch 365 con 20 registros ---
-Batch 365 escrito en TimescaleDB
-
---- Procesando batch 366 con 20 registros ---
-Batch 366 escrito en TimescaleDB
-
---- Procesando batch 367 con 20 registros ---
-Batch 367 escrito en TimescaleDB
-
---- Procesando batch 368 con 16 registros ---
-Batch 368 escrito en TimescaleDB
-
---- Procesando batch 369 con 20 registros ---
-Batch 369 escrito en TimescaleDB
-
---- Procesando batch 370 con 20 registros ---
-Batch 370 escrito en TimescaleDB
-
---- Procesando batch 371 con 25 registros ---
-Batch 371 escrito en TimescaleDB
-
---- Procesando batch 372 con 20 registros ---
-Batch 372 escrito en TimescaleDB
-
---- Procesando batch 373 con 20 registros ---
-Batch 373 escrito en TimescaleDB
-
---- Procesando batch 374 con 20 registros ---
-Batch 374 escrito en TimescaleDB
-
---- Procesando batch 375 con 15 registros ---
-Batch 375 escrito en TimescaleDB
-
---- Procesando batch 376 con 20 registros ---
-Batch 376 escrito en TimescaleDB
-
---- Procesando batch 377 con 20 registros ---
-Batch 377 escrito en TimescaleDB
-
---- Procesando batch 378 con 20 registros ---
-Batch 378 escrito en TimescaleDB
-
---- Procesando batch 379 con 20 registros ---
-Batch 379 escrito en TimescaleDB
-
---- Procesando batch 380 con 20 registros ---
-Batch 380 escrito en TimescaleDB
-
---- Procesando batch 381 con 25 registros ---
-Batch 381 escrito en TimescaleDB
-
---- Procesando batch 382 con 20 registros ---
-Batch 382 escrito en TimescaleDB
-
---- Procesando batch 383 con 20 registros ---
-Batch 383 escrito en TimescaleDB
-
---- Procesando batch 384 con 25 registros ---
-Batch 384 escrito en TimescaleDB
-
---- Procesando batch 385 con 20 registros ---
-Batch 385 escrito en TimescaleDB
-
---- Procesando batch 386 con 25 registros ---
-Batch 386 escrito en TimescaleDB
-
---- Procesando batch 387 con 20 registros ---
-Batch 387 escrito en TimescaleDB
-
---- Procesando batch 388 con 24 registros ---
-Batch 388 escrito en TimescaleDB
-
---- Procesando batch 389 con 20 registros ---
-Batch 389 escrito en TimescaleDB
-
---- Procesando batch 390 con 20 registros ---
-Batch 390 escrito en TimescaleDB
-
---- Procesando batch 391 con 20 registros ---
-Batch 391 escrito en TimescaleDB
-
---- Procesando batch 392 con 21 registros ---
-Batch 392 escrito en TimescaleDB
-
---- Procesando batch 393 con 25 registros ---
-Batch 393 escrito en TimescaleDB
-
---- Procesando batch 394 con 24 registros ---
-Batch 394 escrito en TimescaleDB
-
---- Procesando batch 395 con 19 registros ---
-Batch 395 escrito en TimescaleDB
-
---- Procesando batch 396 con 20 registros ---
-Batch 396 escrito en TimescaleDB
-
---- Procesando batch 397 con 21 registros ---
-Batch 397 escrito en TimescaleDB
-
---- Procesando batch 398 con 21 registros ---
-Batch 398 escrito en TimescaleDB
-
---- Procesando batch 399 con 24 registros ---
-Batch 399 escrito en TimescaleDB
-
---- Procesando batch 400 con 20 registros ---
-Batch 400 escrito en TimescaleDB
-
---- Procesando batch 401 con 21 registros ---
-Batch 401 escrito en TimescaleDB
-
---- Procesando batch 402 con 20 registros ---
+--- Procesando batch 427 con 26 registros ---
 </code></pre></div>
 <h2 id="11-detener-queries">11. Detener queries<a class="headerlink" href="#11-detener-queries" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">spark</span><span class="o">.</span><span class="n">streams</span><span class="o">.</span><span class="n">active</span><span class="p">:</span>
@@ -1602,8 +1369,11 @@ Batch 401 escrito en TimescaleDB
 
 <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Query 4be99b01-dac0-4208-889f-b6918a82b480 detenida
-Query e03adfec-5763-492b-a6bd-0c56ccce5ea9 detenida
+<div class="highlight"><pre><span></span><code>Query 931a9850-953f-4881-93a0-1d6af5bf497f detenida
+Query 4be99b01-dac0-4208-889f-b6918a82b480 detenida
+Query 49e599c5-8480-475e-bfee-3b36df9eb98b detenida
+Query 53fa2918-49a0-4001-9cdf-3df56a64646e detenida
+Query 873d473b-e5ba-47b1-8e33-f7061aeb15fe detenida
 </code></pre></div>
 
 
