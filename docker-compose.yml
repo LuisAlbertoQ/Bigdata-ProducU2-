@@ -75,6 +75,7 @@ services:
       - PYSPARK_SUBMIT_ARGS=--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.postgresql:postgresql:42.7.3 pyspark-shell
     volumes:
       - ./notebooks:/home/jovyan/work
+      - ./scripts:/home/jovyan/scripts
       - ./checkpoint:/home/jovyan/checkpoint
       - ./.env:/home/jovyan/.env
     deploy:

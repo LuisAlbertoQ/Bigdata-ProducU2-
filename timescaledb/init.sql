@@ -16,3 +16,16 @@ SELECT create_hypertable('air_quality_metrics', 'window_start', if_not_exists =>
 
 CREATE INDEX IF NOT EXISTS idx_estacion ON air_quality_metrics (estacion);
 CREATE INDEX IF NOT EXISTS idx_window_start ON air_quality_metrics (window_start DESC);
+
+-- Tabla de predicciones de temperatura para Grafana
+CREATE TABLE IF NOT EXISTS temperature_predictions (
+    time TIMESTAMPTZ NOT NULL,
+    estacion TEXT NOT NULL,
+    real_temp DOUBLE PRECISION,
+    predicted_temp DOUBLE PRECISION,
+    model_name TEXT DEFAULT 'xgboost',
+    risk_level TEXT DEFAULT 'normal'
+);
+SELECT create_hypertable('temperature_predictions', 'time', if_not_exists => TRUE);
+CREATE INDEX IF NOT EXISTS idx_pred_estacion ON temperature_predictions (estacion);
+CREATE INDEX IF NOT EXISTS idx_pred_time ON temperature_predictions (time DESC);

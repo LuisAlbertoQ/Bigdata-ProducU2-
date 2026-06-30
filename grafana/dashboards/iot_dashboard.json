@@ -147,6 +147,99 @@
       ],
       "title": "Eventos por Estacion",
       "type": "piechart"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "pointSize": 3
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Real" },
+            "properties": [
+              { "id": "color", "value": { "fixedColor": "#1f77b4", "mode": "fixed" } },
+              { "id": "custom.lineStyle", "value": { "fill": "solid" } },
+              { "id": "displayName", "value": "Real" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Prediccion 5min" },
+            "properties": [
+              { "id": "color", "value": { "fixedColor": "#ff7f0e", "mode": "fixed" } },
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [10, 5] } },
+              { "id": "displayName", "value": "Prediccion 5min" }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 16, "x": 0, "y": 24 },
+      "targets": [
+        {
+          "rawSql": "SELECT time, real_temp AS value, 'Real' AS metric FROM temperature_predictions ORDER BY time ASC LIMIT 100",
+          "refId": "A",
+          "format": "table"
+        },
+        {
+          "rawSql": "SELECT time, predicted_temp AS value, 'Prediccion 5min' AS metric FROM temperature_predictions ORDER BY time ASC LIMIT 100",
+          "refId": "B",
+          "format": "table"
+        }
+      ],
+      "title": "Prediccion Temperatura (XGBoost 5min)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "postgres", "uid": "timescaledb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "yellow", "value": 2.1 },
+              { "color": "red", "value": 8.1 }
+            ]
+          },
+          "unit": "celsius",
+          "mappings": [
+            {
+              "type": "value",
+              "value": "normal",
+              "options": { "normal": { "text": "Normal", "color": "green" } }
+            },
+            {
+              "type": "value",
+              "value": "warning",
+              "options": { "warning": { "text": "Advertencia", "color": "yellow" } }
+            },
+            {
+              "type": "value",
+              "value": "critical",
+              "options": { "critical": { "text": "CRITICO", "color": "red" } }
+            }
+          ]
+        }
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 24 },
+      "targets": [
+        {
+          "rawSql": "SELECT time, predicted_temp AS value, risk_level AS metric FROM temperature_predictions ORDER BY time DESC LIMIT 1",
+          "refId": "A",
+          "format": "table"
+        }
+      ],
+      "title": "Estado de Riesgo (Prediccion)",
+      "type": "stat"
     }
   ],
   "schemaVersion": 39,

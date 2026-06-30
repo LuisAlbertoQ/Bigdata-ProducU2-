@@ -1,2 +1,2 @@
 modelo,rmse,mae,mape
-LSTM,1.2668,0.8874,6.52
+LSTM,0.27,0.1412,1.33

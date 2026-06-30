@@ -82,7 +82,7 @@ SensorVault es un sistema de monitoreo en tiempo real para cadena de frío farma
 - Monitoreo continuo de temperatura en neveras y almacenes
 - Procesamiento en streaming con Kafka y Spark (<10s)
 - Visualización en dashboards en tiempo real (Grafana)
-- Predicción de temperatura a 5 minutos (XGBoost)
+- Predicción de temperatura a 5 minutos (LSTM + XGBoost)
 - Arquitectura modular y escalable
 
 ### Beneficio principal
@@ -211,7 +211,7 @@ Predecir la temperatura en una nevera farmacéutica a 5 minutos, para anticipar 
   - 3 temporales: hour, minute, dayofweek
   - 15 lags: temp, hum, iaq, pres, eco2 (×3 cada una)
   - 2 medias móviles: temp_rolling_3, temp_rolling_5
-- ~55 muestras post-agregación a ventanas de 5 min
+- ~102 muestras post-agregación a ventanas de 5 min
 - Split: 80% entrenamiento / 20% prueba
 
 ### Nota importante
@@ -227,18 +227,19 @@ Features → Modelo XGBoost → Predicción a 5 min
 
 | Modelo | RMSE | MAPE | Interpretación para cadena de frío |
 |--------|------|------|-----------------------------------|
-| **XGBoost** | **0.2055** | **1.36%** | Error de solo ±0.2°C — excelente |
-| MLP | 0.3445 | 2.61% | ±0.34°C — aceptable |
-| Baseline (lag-1) | 0.8829 | 2.38% | ±0.88°C — línea base |
-| Random Forest | 1.0681 | 3.87% | ±1.07°C — no recomendado |
-| LSTM | 1.2668 | 6.52% | ±1.27°C — necesita más datos |
+| **LSTM 🏆** | **0.2700** | **1.33%** | Error de solo ±0.27°C — excelente |
+| **XGBoost** | **0.3009** | **2.06%** | Error de ±0.30°C — excelente |
+| Baseline (lag-1) | 0.2969 | 1.21% | ±0.30°C — línea base |
+| Random Forest | 0.4034 | 2.60% | ±0.40°C — aceptable |
+| MLP | 1.7576 | 16.85% | ±1.76°C — requiere reajuste |
 
 ### Resultados
 
-- XGBoost: error de solo 0.2°C — suficiente para detectar quiebre de frío
-- Reducción del 77% de error vs baseline
-- Con umbral en 8°C, el modelo detecta la anomalía con 5 min de anticipación
-- MLP también viable si se requiere red neuronal
+- **LSTM y XGBoost empatan técnicamente** (0.27 vs 0.30 de RMSE, diferencia mínima)
+- Con ~102 registros, LSTM alcanzó su potencial (necesita ≥100 datos)
+- Ambos modelos detectan quiebre de frío con 5 min de anticipación
+- MLP quedó fuera: necesita reentrenamiento con los nuevos datos
+- El baseline mejoró al haber más datos — pero sigue siendo reactivo
 
 **Visual:**
 Gráfico de barras RMSE. Línea roja marcando umbral 8°C.
@@ -314,7 +315,7 @@ Línea de tiempo comparativa: sin sistema (flecha roja llegando a pérdida) vs c
 - Primer sistema de **predicción** (no solo monitoreo) para cadena de frío
 - 10x más barato que soluciones tradicionales
 - Instalación simple: un sensor ESP32 por nevera
-- Resultados comprobados: 77% menos error que línea base
+- Resultados comprobados: LSTM y XGBoost con error ±0.3°C
 
 **Visual:**
 Tabla comparativa (SensorVault vs SCADA tradicional)
@@ -344,8 +345,8 @@ Secuencia de 4 capturas: terminal Docker, Kafka, Grafana, Jupyter
 
 - ✅ Pipeline Kappa funcional para monitoreo de cadena de frío
 - ✅ Procesamiento en tiempo real (<10s del sensor al dashboard)
-- ✅ XGBoost predice temperatura a 5 min con error de ±0.2°C
-- ✅ Reducción del 77% de error respecto a línea base
+- ✅ LSTM y XGBoost predicen temperatura a 5 min con error ±0.3°C
+- ✅ A más datos, LSTM se vuelve el mejor modelo (RMSE=0.27)
 - ✅ Arquitectura escalable a cientos de neveras
 
 ### Trabajo futuro
